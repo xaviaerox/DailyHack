@@ -1,0 +1,52 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@theme {
+  --font-serif: "Newsreader", serif;
+  --font-display: "Playfair Display", serif;
+  
+  --color-parchment: #fff9ee;
+  --color-ink: #505050;
+  --color-leather: #805533;
+  --color-shadow: #e1dac6;
+}
+
+@layer base {
+  body {
+    @apply bg-parchment text-ink font-serif antialiased;
+  }
+}
+
+@layer utilities {
+  .parchment-texture {
+    background-image: url('https://www.transparenttextures.com/patterns/parchment.png');
+    background-repeat: repeat;
+  }
+  
+  .glass-tonal {
+    @apply bg-white/50 backdrop-blur-md;
+  }
+  
+  .deckle-edge {
+    clip-path: polygon(
+      0% 0%, 100% 0%, 100% 100%, 0% 100%,
+      2% 98%, 0% 95%, 2% 92%, 0% 88%, 1% 85%, 0% 80%,
+      2% 75%, 0% 70%, 1% 65%, 0% 60%, 2% 55%, 0% 50%,
+      1% 45%, 0% 40%, 2% 35%, 0% 30%, 1% 25%, 0% 20%,
+      2% 15%, 0% 10%, 1% 5%
+    );
+  }
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: var(--color-shadow);
+  border-radius: 10px;
+}
