@@ -681,6 +681,8 @@ export default function App() {
           </button>
         </div>
       )}
+      
+      <div className="flex-grow relative overflow-hidden">
         <AnimatePresence mode="wait">
           <motion.div
             key={view}
