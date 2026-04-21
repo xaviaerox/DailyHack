@@ -121,8 +121,8 @@ const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]
       }}
     >
       <div 
-        className="relative w-full background-grid px-8" 
-        style={{ height: `${containerHeight}px`, minWidth: '1200px' }}
+        className="relative w-full background-grid px-4 md:px-8" 
+        style={{ height: `${containerHeight}px`, minWidth: window.innerWidth < 768 ? '100%' : '1200px' }}
       >
         <style>{`
           .background-grid {
@@ -142,14 +142,14 @@ const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]
           <motion.h1 
             initial={{ opacity: 0, y: -20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            className="text-9xl font-display text-leather italic mb-8"
+            className="text-7xl md:text-9xl font-display text-leather italic mb-8 text-center"
           >
             Topología de Aprendizaje
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
-            className="text-3xl text-ink/40 leading-relaxed italic text-center max-w-2xl"
+            className="text-xl md:text-3xl text-ink/40 leading-relaxed italic text-center max-w-2xl px-6"
           >
             "El conocimiento es un flujo de datos constante,<br/>cada nota es un nodo en la red de aprendizaje."
           </motion.p>
@@ -212,7 +212,7 @@ const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]
                  <div className="w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-leather shadow-xl ring-4 ring-parchment relative z-30" />
                  
                  {/* Metadata */}
-                 <div className="absolute top-[-3rem] left-1/2 -translate-x-1/2 whitespace-nowrap opacity-60 text-[12px] uppercase tracking-widest font-bold text-leather pointer-events-none">
+                 <div className="absolute top-[-3rem] left-1/2 -translate-x-1/2 whitespace-nowrap opacity-60 text-[10px] md:text-[12px] uppercase tracking-widest font-bold text-leather pointer-events-none bg-parchment/80 px-2 rounded-full">
                    {entry.date} <span className="opacity-20 mx-2">|</span> {entry.category}
                  </div>
 
@@ -221,13 +221,15 @@ const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]
                    whileHover={{ y: -10, scale: 1.02 }}
                    onClick={(e) => { e.stopPropagation(); onSelectEntry(entry); }}
                    className={cn(
-                     "absolute w-[450px] p-10 bg-[#fffdf9] shadow-2xl border border-leather/10 cursor-pointer transition-all duration-500",
-                     isAtRight ? "right-12 -translate-y-1/2" : "left-12 -translate-y-1/2"
+                     "absolute w-[80vw] sm:w-[450px] p-6 sm:p-10 bg-[#fffdf9] shadow-2xl border border-leather/10 cursor-pointer transition-all duration-500 z-50",
+                     isAtRight 
+                       ? "right-2 sm:right-12 -translate-y-1/2 origin-right" 
+                       : "left-2 sm:left-12 -translate-y-1/2 origin-left"
                    )}
                  >
                    <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-leather/20 group-hover:bg-leather transition-colors" />
-                   <h3 className="font-display text-4xl text-leather italic mb-4 leading-tight">{entry.title}</h3>
-                   <p className="text-xl text-ink/70 italic line-clamp-3 leading-relaxed">"{entry.quote || entry.content}"</p>
+                   <h3 className="font-display text-2xl md:text-4xl text-leather italic mb-4 leading-tight">{entry.title}</h3>
+                   <p className="text-lg md:text-xl text-ink/70 italic line-clamp-3 leading-relaxed">"{entry.quote || entry.content}"</p>
                  </motion.div>
               </div>
             </motion.div>
@@ -642,7 +644,7 @@ export default function App() {
     };
     setEntries(prev => [...prev, newEntry]);
     setPendingCoords(undefined);
-    setView('archive');
+    setView('map');
   };
 
   const handleDelete = (id: string) => {
