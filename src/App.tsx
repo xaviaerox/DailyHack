@@ -332,30 +332,6 @@ const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, sele
             </motion.article>
           ))}
           
-          {/* Alquimia Special Card */}
-          <motion.article 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="md:col-span-1 xl:col-span-1 group cursor-pointer"
-          >
-            <div className="bg-white p-12 border-2 border-double border-shadow/20 relative shadow-2xl h-full flex flex-col items-center text-center">
-              <span className="block text-[0.7rem] tracking-[0.4em] text-leather mb-8 uppercase font-bold">La Gran Obra</span>
-              <div className="mx-auto mb-10 w-24 h-24 opacity-20">
-                <svg viewBox="0 0 100 100" fill="none" stroke="currentColor" strokeWidth="0.5">
-                  <path d="M50,10 L90,90 L10,90 Z" />
-                  <circle cx="50" cy="60" r="15" />
-                </svg>
-              </div>
-              <h3 className="font-display text-4xl leading-none mb-10">La alquimia del tiempo</h3>
-              <p className="text-lg leading-relaxed text-ink/80 mb-12">
-                <span className="text-5xl font-display font-bold float-left mr-3 mt-1 leading-none text-leather">T</span>
-                ranstornar el plomo en oro es un juego de niños comparado con el intento de detener un solo segundo de felicidad pura.
-              </p>
-              <blockquote className="italic text-2xl text-leather px-4 mt-auto">
-                "El tiempo no corre, se evapora en el alambique de nuestra propia memoria."
-              </blockquote>
-            </div>
-          </motion.article>
         </div>
 
         <div className="mt-24 pt-12 border-t border-shadow/20 flex flex-col items-center">
@@ -569,7 +545,7 @@ const DetailView = ({ entry, onClose, onDelete }: { entry: Entry; onClose: () =>
 export default function App() {
   const [view, setView] = useState<ViewType>('map');
   const [entries, setEntries] = useState<Entry[]>(() => {
-    const saved = localStorage.getItem('asir_hacker_archive');
+    const saved = localStorage.getItem('asir_hacker_archive_v2');
     return saved ? JSON.parse(saved) : SAMPLE_ENTRIES;
   });
   
@@ -579,7 +555,7 @@ export default function App() {
   const [pendingCoords, setPendingCoords] = useState<{ x: number, y: number } | undefined>(undefined);
 
   useEffect(() => {
-    localStorage.setItem('asir_hacker_archive', JSON.stringify(entries));
+    localStorage.setItem('asir_hacker_archive_v2', JSON.stringify(entries));
   }, [entries]);
 
   const filteredEntries = useMemo(() => {
