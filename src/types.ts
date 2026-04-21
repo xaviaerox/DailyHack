@@ -5,6 +5,7 @@ export interface Entry {
   title: string;
   content: string;
   date: string;
+  timestamp: number;
   category: string;
   coordinates?: { x: number; y: number };
   quote?: string;

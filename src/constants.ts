@@ -3,56 +3,68 @@ import { Entry } from './types';
 export const SAMPLE_ENTRIES: Entry[] = [
   {
     id: '1',
-    title: 'Sintaxis del Vacío',
-    content: 'Descubrí que el espacio negativo no es ausencia, es el lienzo donde la tinta cobra significado. Cada silencio en nuestro diario es un respiro necesario para la siguiente gran idea.',
-    date: '02 OCT, 1923',
-    category: 'Filosofía',
-    coordinates: { x: 10, y: 40 },
-    quote: 'El espacio negativo no es ausencia, es el lienzo donde la tinta cobra significado.',
-    tags: ['estética', 'vacío']
+    title: 'El Desafío de la Capa 2',
+    content: 'Hoy entendí por qué el bucle de switching puede tumbar toda una red. Configurar STP no es solo tirar comandos, es entender el latido del tráfico.',
+    date: '10 SEP, 2023',
+    timestamp: new Date('2023-09-10').getTime(),
+    category: 'Redes',
+    coordinates: { x: 15, y: 15 },
+    quote: 'Un broadcast storm es el silencio más ruidoso de un administrador.',
+    tags: ['Cisco', 'Switching', 'STP']
   },
   {
     id: '2',
-    title: 'El Engaño de los Contenedores Flexibles',
-    content: 'Descubrí que aplicar un "flex-basis" estricto actúa como un ancla, impidiendo que el contenido efímero colapse las columnas principales. La estructura debe ser firme pero permitir el flujo orgánico.',
-    date: '09 OCT, 1923',
-    category: 'Arquitectura',
-    coordinates: { x: 45, y: 20 },
-    tags: ['estructura', 'diseño']
+    title: 'Permisos Octales y la Sombra del Root',
+    content: 'chmod 700 es mi nuevo mejor amigo. Entender la diferencia entre sudo y su - ha sido clave para no romper el kernel esta mañana.',
+    date: '22 SEP, 2023',
+    timestamp: new Date('2023-09-22').getTime(),
+    category: 'Sistemas',
+    coordinates: { x: 65, y: 35 },
+    quote: 'En Linux, todo es un archivo, incluso tus errores.',
+    tags: ['Linux', 'Bash', 'Security']
   },
   {
     id: '3',
-    title: 'La Naturaleza del Estado Local',
-    content: 'La hidratación del DOM se asemeja a la restauración de un fresco antiguo: requiere paciencia y correspondencia exacta entre la estructura original y la pintura nueva.',
-    date: '14 OCT, 1923',
-    category: 'Sistemas',
-    coordinates: { x: 75, y: 55 },
-    tags: ['memoria', 'restauración']
+    title: 'Primer Escaneo con Nmap',
+    content: 'Silencioso pero mortal. Lanzar un escaneo -sS me hizo sentir como si estuviera golpeando suavemente las puertas de una fortaleza.',
+    date: '05 OCT, 2023',
+    timestamp: new Date('2023-10-05').getTime(),
+    category: 'Hacking',
+    coordinates: { x: 25, y: 75 },
+    quote: 'La curiosidad es el primer paso hacia la vulnerabilidad.',
+    tags: ['Nmap', 'Recon', 'CyberSec']
   },
   {
     id: '4',
-    title: 'El silencio del puerto antiguo',
-    content: 'Las aguas mecían los barcos con una cadencia hipnótica. No había voces, solo el crujir de la madera vieja contra el muelle de piedra negra.',
-    date: '14 NOV, 1923',
-    category: 'Viajes',
-    quote: 'En el vacío de los muelles, encontré finalmente el eco de mi propio nombre.',
-    tags: ['melancolía', 'mar']
+    title: 'Inyección de SQL en el Laboratorio',
+    content: 'Un simple guion y una comilla pueden abrir lo que se supone que estaba cerrado. Las bases de datos nunca volverán a parecerme seguras.',
+    date: '18 OCT, 2023',
+    timestamp: new Date('2023-10-18').getTime(),
+    category: 'Seguridad',
+    coordinates: { x: 75, y: 110 },
+    quote: "' OR 1=1 -- es la llave maestra de la era digital.",
+    tags: ['WebHacking', 'SQLi', 'Laboratorio']
   },
   {
     id: '5',
-    title: 'Mecánica celeste',
-    content: 'Miramos al cielo esperando respuestas escritas en las estrellas, pero solo encontramos un reloj infinito cuyas piezas no comprendemos.',
-    date: '02 DIC, 1923',
-    category: 'Alquimia',
-    quote: 'El universo es una máquina de vapor movida por sueños olvidados.',
-    tags: ['astros', 'tiempo']
+    title: 'La Magia de Python para Automatización',
+    content: 'Escribí un script que escanea logs y me avisa por Telegram cuando detecta fuerza bruta. Me siento como un pequeño arquitecto de seguridad.',
+    date: '02 NOV, 2023',
+    timestamp: new Date('2023-11-02').getTime(),
+    category: 'Scripts',
+    coordinates: { x: 40, y: 160 },
+    quote: 'Un administrador cansado es un administrador que no sabe programar.',
+    tags: ['Python', 'Automation', 'SSH']
   },
   {
     id: '6',
-    title: 'Cartografía de lo invisible',
-    content: 'Trazar mapas de lugares que no existen es la única forma de no perderse en la realidad. Las fronteras del alma son más vastas que los océanos conocidos.',
-    date: '18 ENE, 1924',
-    category: 'Exploración',
-    tags: ['mapas', 'alma']
+    title: 'Examen Final de Redes Convergentes',
+    content: 'VLANs, VPNs y redundancia. Mi cabeza es ahora una topología de red compleja pero funcional. Certificado de supervivencia obtenido.',
+    date: '20 NOV, 2023',
+    timestamp: new Date('2023-11-20').getTime(),
+    category: 'Certificación',
+    coordinates: { x: 80, y: 210 },
+    quote: 'El ping es el "hola" que salva vidas.',
+    tags: ['ASIR', 'Finals', 'Success']
   }
 ];

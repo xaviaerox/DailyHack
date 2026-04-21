@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Map as MapIcon, Library, PenLine, Search, History, Trash2, Navigation2, Compass, Plus, MoveLeft } from 'lucide-react';
+import { Map as MapIcon, Library, PenLine, Search, History, Trash2, Navigation2, Compass, Plus, MoveLeft, X, Sparkles } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import { ViewType, Entry } from './types.ts';
-import { SAMPLE_ENTRIES } from './constants.ts';
+import { ViewType, Entry } from './types';
+import { SAMPLE_ENTRIES } from './constants';
+import { analyzeEntry } from './gemini';
 
 function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -12,7 +13,7 @@ function cn(...inputs: ClassValue[]) {
 
 // --- Components ---
 
-const Navbar = ({ currentView, setView }: { currentView: ViewType; setView: (v: ViewType) => void }) => (
+const Navbar = ({ currentView, setView, searchQuery, setSearchQuery }: { currentView: ViewType; setView: (v: ViewType) => void; searchQuery: string; setSearchQuery: (q: string) => void }) => (
   <header className="bg-parchment/90 backdrop-blur-sm border-b border-shadow/30 sticky top-0 z-50 w-full">
     <div className="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
       <div className="flex items-center gap-12">
@@ -43,6 +44,8 @@ const Navbar = ({ currentView, setView }: { currentView: ViewType; setView: (v: 
           <input 
             type="text" 
             placeholder="Navegar por tinta..." 
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
             className="bg-transparent border-none focus:ring-0 text-sm italic w-48 focus:w-64 transition-all duration-500 placeholder:text-ink/40 border-b border-transparent focus:border-leather/30 pb-1"
           />
           <Search className="absolute right-0 top-1/2 -translate-y-1/2 text-ink/60 group-hover:text-leather w-4 h-4" />
@@ -80,115 +83,156 @@ const Footbar = ({ currentView, setView }: { currentView: ViewType; setView: (v:
 
 // --- Views ---
 
-const MapView = ({ entries }: { entries: Entry[] }) => {
+const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]; onSelectEntry: (e: Entry) => void; onAddAtLocation: (coords: { x: number, y: number }) => void }) => {
+  // Find the max Y to set container height
+  const containerHeight = useMemo(() => {
+    const maxY = Math.max(...entries.map(e => e.coordinates?.y || 0), 100);
+    return (maxY * 15) + 600; // Transform units to pixels for stability
+  }, [entries]);
+
   return (
-    <main className="relative min-h-[1200px] w-full parchment-texture p-8 md:p-20 overflow-visible background-grid">
-      <style>{`
-        .background-grid {
-          background-image: 
-            radial-gradient(circle at 20% 30%, rgba(128, 85, 51, 0.03) 0%, transparent 50%),
-            radial-gradient(circle at 80% 70%, rgba(128, 85, 51, 0.03) 0%, transparent 50%),
-            linear-gradient(rgba(225, 218, 198, 0.2) 1px, transparent 1px),
-            linear-gradient(90deg, rgba(225, 218, 198, 0.2) 1px, transparent 1px);
-          background-size: 100% 100%, 100% 100%, 100px 100px, 100px 100px;
+    <main 
+      className="relative w-full bg-parchment parchment-texture grid-nautical overflow-y-auto overflow-x-hidden custom-scrollbar background-grid"
+      style={{ height: 'calc(100vh - 72px)' }}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).classList.contains('background-grid')) {
+          const rect = e.currentTarget.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          onAddAtLocation({ x, y: (y / (containerHeight / rect.height)) * 100 }); // Approximate for pixel-based y
         }
-      `}</style>
-      
-      {/* Decorative Compass Roses */}
-      <div className="absolute top-[10%] left-[5%] rotate-12 opacity-10 pointer-events-none">
-        <Compass size={300} strokeWidth={0.5} className="text-leather" />
-      </div>
-      <div className="absolute bottom-[10%] right-[10%] -rotate-12 scale-75 opacity-10 pointer-events-none">
-        <Navigation2 size={300} strokeWidth={0.5} className="text-leather" />
-      </div>
+      }}
+    >
+      <div 
+        className="relative w-full background-grid px-8" 
+        style={{ height: `${containerHeight}px`, minWidth: '1200px' }}
+      >
+        <style>{`
+          .background-grid {
+            background-image: 
+              linear-gradient(rgba(128, 85, 51, 0.03) 1px, transparent 1px),
+              linear-gradient(90deg, rgba(128, 85, 51, 0.03) 1px, transparent 1px);
+            background-size: 100px 100px;
+          }
+        `}</style>
+        
+        {/* Background Decorative Elements */}
+        <Compass size={600} className="absolute top-[5%] right-[5%] opacity-[0.02] text-leather rotate-12 pointer-events-none" />
+        <Navigation2 size={400} className="absolute top-[40%] left-[2%] opacity-[0.02] text-leather -rotate-12 pointer-events-none" />
 
-      <section className="max-w-2xl mb-32 relative z-40">
-        <h1 className="font-display text-5xl md:text-7xl text-leather tracking-tight leading-tight mb-4">Carta Náutica del Saber</h1>
-        <p className="text-lg md:text-xl text-ink/80 leading-relaxed italic">
-          Una travesía visual a través de los fragmentos de conocimiento recolectados. Cada nodo marca un hito en la expansión de nuestras fronteras intelectuales.
-        </p>
-      </section>
+        {/* Header decoration */}
+        <section className="relative z-10 pointer-events-none w-full flex flex-col items-center pt-48 pb-64">
+          <motion.h1 
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-9xl font-display text-leather italic mb-8"
+          >
+            Carta Náutica
+          </motion.h1>
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-3xl text-ink/40 leading-relaxed italic text-center max-w-2xl"
+          >
+            "El conocimiento es un mar sin orillas,<br/>cada nota es un faro en la penumbra."
+          </motion.p>
+        </section>
 
-      {/* SVG Path */}
-      <svg className="absolute inset-0 w-full h-full pointer-events-none" preserveAspectRatio="none">
-        <motion.path 
-          initial={{ pathLength: 0, opacity: 0 }}
-          animate={{ pathLength: 1, opacity: 0.3 }}
-          transition={{ duration: 2, ease: "easeInOut" }}
-          d="M 100 400 C 300 400, 400 100, 600 200 S 800 600, 1000 450 S 1300 150, 1500 300 S 1700 800, 1400 1000 S 800 900, 500 1100"
-          className="stroke-leather stroke-[1.5] fill-none"
-          strokeDasharray="8 8"
-        />
-      </svg>
-
-      {/* Map Nodes */}
-      {entries.filter(e => e.coordinates).map((entry, idx) => (
-        <motion.div 
-          key={entry.id}
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: idx * 0.3 + 1 }}
-          className="absolute"
-          style={{ left: `${entry.coordinates?.x}%`, top: `${entry.coordinates?.y}%` }}
+        {/* SVG Path */}
+        <svg 
+          className="absolute inset-0 w-full h-full pointer-events-none" 
+          viewBox={`0 0 100 ${containerHeight}`} 
+          preserveAspectRatio="none"
         >
-          <div className="w-4 h-4 bg-leather rounded-full border-4 border-parchment ring-2 ring-leather/20 shadow-lg relative z-20 group cursor-pointer" />
+          <motion.path 
+            initial={{ pathLength: 0 }}
+            whileInView={{ pathLength: 1 }}
+            viewport={{ once: false, amount: 0.01 }}
+            transition={{ duration: 4, ease: "linear" }}
+            d={useMemo(() => {
+              const sorted = entries
+                .filter(e => e.coordinates)
+                .sort((a, b) => a.timestamp - b.timestamp);
+              
+              if (sorted.length < 1) return "";
+              
+              let d = `M ${sorted[0].coordinates!.x} ${sorted[0].coordinates!.y * 15 + 400}`;
+              for (let i = 1; i < sorted.length; i++) {
+                const prev = sorted[i-1].coordinates!;
+                const curr = sorted[i].coordinates!;
+                const py = prev.y * 15 + 400;
+                const cx = curr.x;
+                const cy = curr.y * 15 + 400;
+                
+                d += ` C ${prev.x} ${py + (cy - py) / 2}, ${cx} ${py + (cy - py) / 2}, ${cx} ${cy}`;
+              }
+              // Extend to bottom
+              const last = sorted[sorted.length-1].coordinates!;
+              d += ` L ${last.x} ${containerHeight}`;
+              return d;
+            }, [entries, containerHeight])}
+            className="stroke-leather stroke-[0.3] fill-none opacity-40"
+            strokeDasharray="6 4"
+          />
+        </svg>
+
+        {/* Entries */}
+        {entries.sort((a,b) => a.timestamp - b.timestamp).map((entry, idx) => {
+          const x = entry.coordinates?.x || 50;
+          const y = (entry.coordinates?.y || 0) * 15 + 400;
+          const isAtRight = x > 50;
           
-          <div className={cn(
-            "absolute z-30 transition-all duration-500 w-[280px] md:w-[320px]",
-            idx % 2 === 0 ? "left-6 -top-12" : "-left-[320px] top-6"
-          )}>
-            <time className="italic text-sm text-leather/70 uppercase tracking-[0.2em] block mb-2">
-              {entry.date} {idx === 0 ? '— Inicio' : ''}
-            </time>
-            <div className={cn(
-               "p-6 rounded-sm shadow-xl border border-shadow/20 glass-tonal parchment-texture",
-               idx === 2 ? "border-l-4 border-l-leather" : ""
-            )}>
-              <div className="flex justify-between items-start mb-2">
-                <h2 className="font-display text-2xl text-leather leading-tight">{entry.title}</h2>
-                {idx === 1 && <PenLine size={16} className="text-leather/40" />}
-                {idx === 2 && (
-                  <div className="flex gap-2">
-                    <History size={16} className="text-ink/40" />
-                    <Trash2 size={16} className="text-ink/40" />
-                  </div>
-                )}
+          return (
+            <motion.div 
+              key={entry.id}
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true, amount: 0.5 }}
+              className="absolute group z-20"
+              style={{ top: `${y}px`, left: `${x}%` }}
+            >
+              <div className="relative">
+                 <div className="w-6 h-6 -translate-x-1/2 -translate-y-1/2 rounded-full bg-leather shadow-xl ring-4 ring-parchment relative z-30" />
+                 
+                 {/* Metadata */}
+                 <div className="absolute top-[-3rem] left-1/2 -translate-x-1/2 whitespace-nowrap opacity-60 text-[12px] uppercase tracking-widest font-bold text-leather pointer-events-none">
+                   {entry.date} <span className="opacity-20 mx-2">|</span> {entry.category}
+                 </div>
+
+                 {/* Card */}
+                 <motion.div
+                   whileHover={{ y: -10, scale: 1.02 }}
+                   onClick={(e) => { e.stopPropagation(); onSelectEntry(entry); }}
+                   className={cn(
+                     "absolute w-[450px] p-10 bg-[#fffdf9] shadow-2xl border border-leather/10 cursor-pointer transition-all duration-500",
+                     isAtRight ? "right-12 -translate-y-1/2" : "left-12 -translate-y-1/2"
+                   )}
+                 >
+                   <div className="absolute top-0 bottom-0 left-0 w-1.5 bg-leather/20 group-hover:bg-leather transition-colors" />
+                   <h3 className="font-display text-4xl text-leather italic mb-4 leading-tight">{entry.title}</h3>
+                   <p className="text-xl text-ink/70 italic line-clamp-3 leading-relaxed">"{entry.quote || entry.content}"</p>
+                 </motion.div>
               </div>
-              {idx === 2 && <div className="text-[10px] text-leather/60 mb-2 tracking-wider uppercase">Arquitectura · Sistemas</div>}
-              <p className="text-sm leading-relaxed text-ink/80 italic">
-                {entry.quote || entry.content.substring(0, 150) + '...'}
-              </p>
-            </div>
-          </div>
-        </motion.div>
-      ))}
+            </motion.div>
+          );
+        })}
 
-      {/* Terra Incognita Node */}
-      <div className="absolute left-[85%] top-[25%]">
-        <div className="w-6 h-6 bg-leather/30 rounded-full animate-pulse ring-4 ring-leather/10 relative z-20" />
-        <div className="absolute left-10 -top-4 w-[240px]">
-          <div className="bg-white/40 backdrop-blur-md p-4 rounded-full border border-dashed border-leather/30 text-center">
-            <Compass size={24} className="mx-auto text-leather mb-1 opacity-50" />
-            <p className="italic text-[0.6rem] text-leather tracking-widest uppercase">Terra Incognita</p>
-          </div>
+        {/* End Mark */}
+        <div className="absolute bottom-0 left-0 w-full flex flex-col items-center py-64 opacity-10">
+          <Compass size={150} className="animate-[spin_20s_linear_infinite]" />
+          <p className="mt-8 text-2xl uppercase tracking-[1em]">Fin del Archivo</p>
         </div>
-      </div>
-
-      <div className="absolute left-[20%] top-[20%] rotate-[-20deg] opacity-20 pointer-events-none select-none">
-        <span className="font-display text-6xl text-leather/40 font-bold">OCTUBRE</span>
-      </div>
-      <div className="absolute right-[15%] top-[50%] rotate-[15deg] opacity-20 pointer-events-none select-none">
-        <span className="font-display text-6xl text-leather/40 font-bold">NOVIEMBRE</span>
-      </div>
-
-      <div className="absolute right-20 top-[40%] font-serif italic text-lg text-ink/30 rotate-90 tracking-[1em] select-none">
-        40° 41' 21" N / 74° 02' 40" W
       </div>
     </main>
   );
 };
 
-const ArchiveView = ({ entries }: { entries: Entry[] }) => {
+const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, selectedCategory, setSelectedCategory }: { entries: Entry[]; onSelectEntry: (e: Entry) => void; searchQuery: string; setSearchQuery: (q: string) => void; selectedCategory: string; setSelectedCategory: (c: string) => void }) => {
+  const categories = useMemo(() => {
+    const cats = entries.map(e => e.category);
+    return ['Todos', ...Array.from(new Set(cats))];
+  }, [entries]);
+
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-parchment parchment-texture">
       <aside className="w-full lg:w-96 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-shadow/20 bg-shadow/5">
@@ -202,6 +246,8 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
               <input 
                 type="text" 
                 placeholder="Escriba aquí..." 
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-transparent border-0 border-b-2 border-ink/10 py-4 text-xl focus:ring-0 focus:outline-none focus:border-leather transition-colors text-ink placeholder:text-ink/20 placeholder:italic"
               />
             </div>
@@ -209,21 +255,29 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
             <div>
               <h3 className="text-[0.7rem] uppercase tracking-widest text-ink/50 mb-6">Cronología</h3>
               <div className="space-y-4">
-                {['Todos los Siglos', 'Era de Vapor', 'La Gran Quietud'].map((c, i) => (
-                  <label key={c} className="flex items-center justify-between cursor-pointer group">
-                    <span className={cn("text-lg transition-colors", i === 0 ? "text-ink font-medium" : "text-ink/60 group-hover:text-leather")}>{c}</span>
-                    <span className="text-xs italic text-ink/30">{[342, 84, 12][i]}</span>
-                  </label>
+                {categories.map((c) => (
+                  <button 
+                    key={c} 
+                    onClick={() => setSelectedCategory(c)}
+                    className="flex items-center justify-between w-full cursor-pointer group"
+                  >
+                    <span className={cn("text-lg transition-colors", selectedCategory === c ? "text-leather font-medium scale-105" : "text-ink/60 group-hover:text-leather")}>{c}</span>
+                    <span className="text-xs italic text-ink/30">{c === 'Todos' ? entries.length : entries.filter(e => e.category === c).length}</span>
+                  </button>
                 ))}
               </div>
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {['#melancolía', '#alquimia', '#viajes'].map((tag, i) => (
-                <button key={tag} className={cn(
-                  "px-4 py-2 border border-shadow/30 text-ink/70 text-sm italic hover:border-leather hover:text-leather transition-all",
-                  i === 2 && "bg-leather/5 border-leather text-leather"
-                )}>
+              {['#melancolía', '#alquimia', '#viajes'].map((tag) => (
+                <button 
+                  key={tag} 
+                  onClick={() => setSearchQuery(tag)}
+                  className={cn(
+                    "px-4 py-2 border border-shadow/30 text-ink/70 text-sm italic hover:border-leather hover:text-leather transition-all",
+                    searchQuery === tag && "bg-leather/5 border-leather text-leather"
+                  )}
+                >
                   {tag}
                 </button>
               ))}
@@ -238,7 +292,7 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
             <h2 className="font-display text-3xl text-ink font-light">Folios del Siglo XX</h2>
             <div className="h-1 w-24 bg-leather mt-2"></div>
           </div>
-          <div className="text-sm italic text-ink/40">Exhibiendo 12 fragmentos de la memoria colectiva.</div>
+          <div className="text-sm italic text-ink/40">Exhibiendo {entries.length} fragmentos de la memoria colectiva.</div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
@@ -247,7 +301,8 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
               key={entry.id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: idx * 0.1 }}
+              transition={{ delay: idx * 0.05 }}
+              onClick={() => onSelectEntry(entry)}
               className="group cursor-pointer"
             >
               <div className={cn(
@@ -266,7 +321,7 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
                 <h3 className="font-display text-3xl leading-tight mb-6 group-hover:text-leather transition-colors">{entry.title}</h3>
                 <p className="text-lg leading-relaxed text-ink/80 mb-8 flex-grow">
                   <span className="text-5xl font-display font-bold float-left mr-3 mt-1 leading-none text-leather">{entry.content[0]}</span>
-                  {entry.content.substring(1)}
+                  {entry.content.substring(1, 200)}{entry.content.length > 200 ? '...' : ''}
                 </p>
                 {entry.quote && (
                   <blockquote className="border-l-4 border-leather/30 pl-4 italic text-xl text-ink/80 font-serif leading-snug mt-auto pt-4">
@@ -314,10 +369,34 @@ const ArchiveView = ({ entries }: { entries: Entry[] }) => {
   );
 };
 
-const EditorView = ({ onSave, onCancel }: { onSave: (e: Partial<Entry>) => void, onCancel: () => void }) => {
+const EditorView = ({ onSave, onCancel, initialCoords }: { onSave: (e: Partial<Entry>) => void, onCancel: () => void, initialCoords?: { x: number, y: number } }) => {
   const [title, setTitle] = useState('');
   const [category, setCategory] = useState('');
   const [content, setContent] = useState('');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+
+  const handleAI = async () => {
+    if (!content) return;
+    setIsAnalyzing(true);
+    try {
+      const analysis = await analyzeEntry(content);
+      setTitle(analysis.title || title);
+      setCategory(analysis.category || category);
+      // We'll save with the quote included
+      onSave({ 
+        title: analysis.title || title, 
+        category: analysis.category || category, 
+        content, 
+        quote: analysis.quote, 
+        tags: analysis.tags,
+        coordinates: initialCoords 
+      });
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setIsAnalyzing(false);
+    }
+  };
 
   return (
     <main className="min-h-screen flex items-center justify-center p-4 md:p-8 bg-[#1a120b] relative overflow-hidden">
@@ -381,9 +460,18 @@ const EditorView = ({ onSave, onCancel }: { onSave: (e: Partial<Entry>) => void,
         <div className="absolute left-1/2 top-0 bottom-0 w-8 -translate-x-1/2 bg-gradient-to-r from-black/20 via-transparent to-black/20 pointer-events-none"></div>
 
         {/* Wax Seal Button */}
-        <div className="absolute bottom-[-2rem] left-1/2 -translate-x-1/2 z-50">
+        <div className="absolute bottom-[-2rem] left-1/2 -translate-x-1/2 z-50 flex gap-8 items-center">
           <button 
-            onClick={() => onSave({ title, category, content })}
+            onClick={handleAI}
+            disabled={isAnalyzing}
+            className="w-16 h-16 rounded-full bg-leather/10 border border-leather/30 flex items-center justify-center text-leather hover:bg-leather hover:text-parchment transition-all duration-500 group relative shadow-lg overflow-hidden disabled:opacity-50"
+          >
+            <div className={cn("absolute inset-0 bg-leather transition-transform duration-700 translate-y-full group-hover:translate-y-0")}></div>
+            <Sparkles size={24} className={cn("relative z-10 transition-transform group-hover:rotate-12", isAnalyzing && "animate-pulse")} />
+          </button>
+
+          <button 
+            onClick={() => onSave({ title, category, content, coordinates: initialCoords })}
             className="group relative flex items-center justify-center scale-75 md:scale-100"
           >
             <div className="w-32 h-32 rounded-full flex items-center justify-center transition-transform duration-300 group-hover:scale-110 active:scale-95 shadow-[0_10px_30px_rgba(0,0,0,0.5)]" style={{ background: 'radial-gradient(circle at 30% 30%, #b22222, #8b0000 60%, #5a0000)' }}>
@@ -408,11 +496,101 @@ const EditorView = ({ onSave, onCancel }: { onSave: (e: Partial<Entry>) => void,
   );
 };
 
+const DetailView = ({ entry, onClose, onDelete }: { entry: Entry; onClose: () => void; onDelete: (id: string) => void }) => {
+  return (
+    <motion.div 
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-12 bg-black/40 backdrop-blur-sm"
+      onClick={onClose}
+    >
+      <motion.div 
+        initial={{ scale: 0.9, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        className="w-full max-w-4xl bg-parchment parchment-texture shadow-2xl relative overflow-hidden flex flex-col md:flex-row max-h-[90vh]"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="w-full md:w-1/3 bg-shadow/20 p-8 md:p-12 border-b md:border-b-0 md:border-r border-leather/10 flex flex-col justify-between">
+          <div>
+            <span className="block text-[0.7rem] tracking-[0.3em] text-leather/60 mb-8 uppercase">{entry.date}</span>
+            <div className="text-leather/40 text-[10px] tracking-widest uppercase mb-2">Clasificación</div>
+            <div className="font-display text-4xl text-leather italic leading-tight mb-8">{entry.category}</div>
+            
+            {entry.tags && (
+              <div className="flex flex-wrap gap-2 mb-12">
+                {entry.tags.map(t => (
+                  <span key={t} className="text-[10px] uppercase tracking-wider text-ink/40 border border-ink/10 px-2 py-1 italic">#{t}</span>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <div className="flex gap-4">
+            <button 
+              onClick={() => { onDelete(entry.id); onClose(); }}
+              className="flex items-center gap-2 text-ink/40 hover:text-red-700 transition-colors text-xs uppercase tracking-widest"
+            >
+              <Trash2 size={14} /> Quemar Folio
+            </button>
+          </div>
+        </div>
+
+        <div className="flex-1 p-8 md:p-16 overflow-y-auto custom-scrollbar relative">
+          <button 
+            onClick={onClose}
+            className="absolute top-8 right-8 text-leather/40 hover:text-leather transition-colors"
+          >
+            <X size={24} />
+          </button>
+
+          <h2 className="font-display text-5xl md:text-6xl text-ink leading-tight mb-12">{entry.title}</h2>
+          
+          <div className="mb-12">
+            <div className="text-6xl font-display font-bold float-left mr-4 mt-2 leading-none text-leather">{entry.content[0]}</div>
+            <p className="text-xl leading-[2.2rem] text-ink/90 whitespace-pre-wrap">
+              {entry.content.substring(1)}
+            </p>
+          </div>
+
+          {entry.quote && (
+            <blockquote className="border-l-8 border-leather/10 pl-8 italic text-2xl text-leather/80 font-serif leading-snug py-4 bg-leather/5">
+              "{entry.quote}"
+            </blockquote>
+          )}
+        </div>
+      </motion.div>
+    </motion.div>
+  );
+};
+
 // --- Main App ---
 
 export default function App() {
   const [view, setView] = useState<ViewType>('map');
-  const [entries, setEntries] = useState<Entry[]>(SAMPLE_ENTRIES);
+  const [entries, setEntries] = useState<Entry[]>(() => {
+    const saved = localStorage.getItem('asir_hacker_archive');
+    return saved ? JSON.parse(saved) : SAMPLE_ENTRIES;
+  });
+  
+  const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [pendingCoords, setPendingCoords] = useState<{ x: number, y: number } | undefined>(undefined);
+
+  useEffect(() => {
+    localStorage.setItem('asir_hacker_archive', JSON.stringify(entries));
+  }, [entries]);
+
+  const filteredEntries = useMemo(() => {
+    return [...entries].sort((a, b) => b.timestamp - a.timestamp).filter(e => {
+      const matchesSearch = e.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
+                            e.content.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                            e.category.toLowerCase().includes(searchQuery.toLowerCase());
+      const matchesCategory = selectedCategory === 'Todos' || e.category === selectedCategory;
+      return matchesSearch && matchesCategory;
+    });
+  }, [entries, searchQuery, selectedCategory]);
 
   const handleSave = (entry: Partial<Entry>) => {
     const newEntry: Entry = {
@@ -420,15 +598,34 @@ export default function App() {
       title: entry.title || 'Sin Título',
       content: entry.content || '',
       category: entry.category || 'General',
+      quote: entry.quote,
+      tags: entry.tags,
+      timestamp: Date.now(),
+      coordinates: entry.coordinates || pendingCoords || { x: 20 + Math.random() * 60, y: 20 + Math.random() * 60 },
       date: new Date().toLocaleDateString('es-ES', { day: '2-digit', month: 'short', year: 'numeric' }).toUpperCase(),
     };
     setEntries(prev => [...prev, newEntry]);
+    setPendingCoords(undefined);
     setView('archive');
+  };
+
+  const handleDelete = (id: string) => {
+    setEntries(prev => prev.filter(e => e.id !== id));
+  };
+
+  const handleAddAtLocation = (coords: { x: number, y: number }) => {
+    setPendingCoords(coords);
+    setView('editor');
   };
 
   return (
     <div className="min-h-screen flex flex-col selection:bg-leather/20 selection:text-leather">
-      <Navbar currentView={view} setView={setView} />
+      <Navbar 
+        currentView={view} 
+        setView={setView} 
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
       
       <div className="flex-grow relative overflow-hidden">
         <AnimatePresence mode="wait">
@@ -440,29 +637,46 @@ export default function App() {
             transition={{ duration: 0.5, ease: "easeInOut" }}
             className="w-full h-full"
           >
-            {view === 'map' && <MapView entries={entries} />}
-            {view === 'archive' && <ArchiveView entries={entries} />}
-            {view === 'editor' && <EditorView onSave={handleSave} onCancel={() => setView('map')} />}
+            {view === 'map' && (
+              <MapView 
+                entries={entries} 
+                onSelectEntry={setSelectedEntry} 
+                onAddAtLocation={handleAddAtLocation}
+              />
+            )}
+            {view === 'archive' && (
+              <ArchiveView 
+                entries={filteredEntries} 
+                onSelectEntry={setSelectedEntry}
+                searchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
+              />
+            )}
+            {view === 'editor' && (
+              <EditorView 
+                onSave={handleSave} 
+                onCancel={() => { setView('map'); setPendingCoords(undefined); }} 
+                initialCoords={pendingCoords}
+              />
+            )}
           </motion.div>
         </AnimatePresence>
       </div>
 
+      <AnimatePresence>
+        {selectedEntry && (
+          <DetailView 
+            entry={selectedEntry} 
+            onClose={() => setSelectedEntry(null)} 
+            onDelete={handleDelete}
+          />
+        )}
+      </AnimatePresence>
+
       {view !== 'editor' && <Footbar currentView={view} setView={setView} />}
 
-      {/* Floating Action Buttons for Map View */}
-      {view === 'map' && (
-        <div className="fixed bottom-24 right-8 flex flex-col gap-4 z-40">
-          <button 
-            onClick={() => setView('editor')}
-            className="bg-leather text-parchment w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 hover:bg-leather/90 transition-all group border-4 border-parchment/50"
-          >
-            <PenLine size={28} className="transition-transform group-hover:rotate-12" />
-          </button>
-          <button className="bg-shadow text-leather w-14 h-14 rounded-full flex items-center justify-center shadow-lg hover:bg-parchment border border-shadow/30 transition-all">
-            <Plus size={24} />
-          </button>
-        </div>
-      )}
     </div>
   );
 }
