@@ -1,6 +1,6 @@
 import { Entry } from './types';
 
-export const SAMPLE_ENTRIES: Entry[] = [
+export const REAL_ENTRIES: Entry[] = [
   {
     id: 'entry-0',
     title: 'Bienvenida y Presentación (Día 0)',
@@ -112,3 +112,5 @@ export const SAMPLE_ENTRIES: Entry[] = [
     tags: ['ML', 'Python', 'R']
   }
 ];
+
+export const SAMPLE_ENTRIES: Entry[] = [];

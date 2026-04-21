@@ -1,10 +1,10 @@
 import { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Map as MapIcon, Library, PenLine, Search, History, Trash2, Navigation2, Compass, Plus, MoveLeft, X, Sparkles } from 'lucide-react';
+import { Map as MapIcon, Library, PenLine, Search, History, Trash2, Navigation2, Compass, Plus, MoveLeft, X, Sparkles, Lock, Unlock, LogOut, Info } from 'lucide-react';
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import { ViewType, Entry } from './types';
-import { SAMPLE_ENTRIES } from './constants';
+import { REAL_ENTRIES, SAMPLE_ENTRIES } from './constants';
 import { analyzeEntry } from './gemini';
 
 function cn(...inputs: ClassValue[]) {
@@ -13,11 +13,16 @@ function cn(...inputs: ClassValue[]) {
 
 // --- Components ---
 
-const Navbar = ({ currentView, setView, searchQuery, setSearchQuery }: { currentView: ViewType; setView: (v: ViewType) => void; searchQuery: string; setSearchQuery: (q: string) => void }) => (
+const Navbar = ({ currentView, setView, searchQuery, setSearchQuery, setSelectedCategory, isAdmin, onLogout, onLoginOpen }: { currentView: ViewType; setView: (v: ViewType) => void; searchQuery: string; setSearchQuery: (q: string) => void, setSelectedCategory: (c: string) => void, isAdmin: boolean, onLogout: () => void, onLoginOpen: () => void }) => (
   <header className="bg-parchment/90 backdrop-blur-sm border-b border-shadow/30 sticky top-0 z-50 w-full">
     <div className="flex justify-between items-center w-full px-8 py-4 max-w-[1600px] mx-auto">
       <div className="flex items-center gap-12">
-        <a href="#" className="text-2xl font-display font-bold italic text-leather">La Crónica Atemporal</a>
+        <button 
+          onClick={() => { setView('map'); setSearchQuery(''); setSelectedCategory('Todos'); }}
+          className="text-2xl font-display font-bold italic text-leather hover:opacity-80 transition-opacity"
+        >
+          La Crónica Atemporal
+        </button>
         <nav className="hidden md:flex gap-8 items-center mt-1">
           <button 
             onClick={() => setView('map')}
@@ -50,15 +55,27 @@ const Navbar = ({ currentView, setView, searchQuery, setSearchQuery }: { current
           />
           <Search className="absolute right-0 top-1/2 -translate-y-1/2 text-ink/60 group-hover:text-leather w-4 h-4" />
         </div>
-        <button 
-          onClick={() => setView('editor')}
-          className={cn(
-            "p-2 rounded-full transition-all duration-300",
-            currentView === 'editor' ? "bg-leather text-parchment" : "text-ink/70 hover:bg-shadow/20 hover:text-leather"
-          )}
-        >
-          <PenLine size={20} />
-        </button>
+        
+        {isAdmin ? (
+          <div className="flex items-center gap-4">
+            <button 
+              onClick={() => setView('editor')}
+              className={cn(
+                "p-2 rounded-full transition-all duration-300",
+                currentView === 'editor' ? "bg-leather text-parchment" : "text-ink/70 hover:bg-shadow/20 hover:text-leather"
+              )}
+            >
+              <PenLine size={20} />
+            </button>
+            <button onClick={onLogout} className="p-2 text-ink/40 hover:text-leather transition-colors" title="Cerrar Sesión">
+              <LogOut size={18} />
+            </button>
+          </div>
+        ) : (
+          <button onClick={onLoginOpen} className="p-2 text-ink/40 hover:text-leather transition-colors" title="Acceso Propietario">
+            <Lock size={18} />
+          </button>
+        )}
       </div>
     </div>
   </header>
@@ -269,7 +286,7 @@ const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, sele
             </div>
 
             <div className="flex flex-wrap gap-2">
-              {['#melancolía', '#alquimia', '#viajes'].map((tag) => (
+              {['#sistemas', '#redes', '#ciberseguridad'].map((tag) => (
                 <button 
                   key={tag} 
                   onClick={() => setSearchQuery(tag)}
@@ -405,7 +422,7 @@ const EditorView = ({ onSave, onCancel, initialCoords }: { onSave: (e: Partial<E
               <input 
                 value={category}
                 onChange={e => setCategory(e.target.value)}
-                placeholder="Ej. Alquimia, Botánica..." 
+                placeholder="Ej. Redes, Ciberseguridad..." 
                 className="bg-transparent border-0 border-b border-leather/20 focus:border-leather/60 focus:ring-0 font-serif italic text-3xl text-leather placeholder:text-leather/20 transition-all text-center" 
               />
             </div>
@@ -472,7 +489,7 @@ const EditorView = ({ onSave, onCancel, initialCoords }: { onSave: (e: Partial<E
   );
 };
 
-const DetailView = ({ entry, onClose, onDelete }: { entry: Entry; onClose: () => void; onDelete: (id: string) => void }) => {
+const DetailView = ({ entry, onClose, onDelete, isAdmin }: { entry: Entry; onClose: () => void; onDelete: (id: string) => void, isAdmin: boolean }) => {
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -503,12 +520,14 @@ const DetailView = ({ entry, onClose, onDelete }: { entry: Entry; onClose: () =>
           </div>
 
           <div className="flex gap-4">
-            <button 
-              onClick={() => { onDelete(entry.id); onClose(); }}
-              className="flex items-center gap-2 text-ink/40 hover:text-red-700 transition-colors text-xs uppercase tracking-widest"
-            >
-              <Trash2 size={14} /> Quemar Folio
-            </button>
+            {isAdmin && (
+              <button 
+                onClick={() => { onDelete(entry.id); onClose(); }}
+                className="flex items-center gap-2 text-ink/40 hover:text-red-700 transition-colors text-xs uppercase tracking-widest"
+              >
+                <Trash2 size={14} /> Quemar Folio
+              </button>
+            )}
           </div>
         </div>
 
@@ -544,9 +563,18 @@ const DetailView = ({ entry, onClose, onDelete }: { entry: Entry; onClose: () =>
 
 export default function App() {
   const [view, setView] = useState<ViewType>('map');
+  const [isAdmin, setIsAdmin] = useState(() => sessionStorage.getItem('dailyhack_admin') === 'true');
+  const [isLoginOpen, setIsLoginOpen] = useState(false);
+  const [password, setPassword] = useState('');
+  
+  const [isInitialized, setIsInitialized] = useState(() => localStorage.getItem('dailyhack_initialized') === 'true');
+
   const [entries, setEntries] = useState<Entry[]>(() => {
-    const saved = localStorage.getItem('asir_hacker_archive_v2');
-    return saved ? JSON.parse(saved) : SAMPLE_ENTRIES;
+    const saved = localStorage.getItem('dailyhack_entries_v4');
+    if (localStorage.getItem('dailyhack_initialized') === 'true') {
+      return saved ? JSON.parse(saved) : SAMPLE_ENTRIES;
+    }
+    return REAL_ENTRIES;
   });
   
   const [selectedEntry, setSelectedEntry] = useState<Entry | null>(null);
@@ -555,8 +583,40 @@ export default function App() {
   const [pendingCoords, setPendingCoords] = useState<{ x: number, y: number } | undefined>(undefined);
 
   useEffect(() => {
-    localStorage.setItem('asir_hacker_archive_v2', JSON.stringify(entries));
-  }, [entries]);
+    if (isInitialized) {
+      localStorage.setItem('dailyhack_entries_v4', JSON.stringify(entries));
+    }
+  }, [entries, isInitialized]);
+
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Simple obfuscated key check. For a portfolio, this prevents casual editing.
+    // In a real app, this would be a hash or .env check.
+    if (password === 'asir2026') {
+      setIsAdmin(true);
+      sessionStorage.setItem('dailyhack_admin', 'true');
+      setIsLoginOpen(false);
+      setPassword('');
+      // If logging in as admin, we usually want to be in the "Master/Portfolio" mode 
+      // but let's allow them to edit their local diary too.
+    } else {
+      alert('Llave incorrecta. Solo el cronista oficial tiene acceso.');
+    }
+  };
+
+  const handleLogout = () => {
+    setIsAdmin(false);
+    sessionStorage.removeItem('dailyhack_admin');
+  };
+
+  const startMyDiary = () => {
+    if (confirm('¿Deseas vaciar las crónicas de ejemplo y empezar tu propia bitácora personal? (Tus datos se guardarán localmente en este navegador).')) {
+      setIsInitialized(true);
+      localStorage.setItem('dailyhack_initialized', 'true');
+      setEntries(SAMPLE_ENTRIES);
+      setView('editor');
+    }
+  };
 
   const filteredEntries = useMemo(() => {
     return [...entries].sort((a, b) => b.timestamp - a.timestamp).filter(e => {
@@ -601,9 +661,26 @@ export default function App() {
         setView={setView} 
         searchQuery={searchQuery}
         setSearchQuery={setSearchQuery}
+        setSelectedCategory={setSelectedCategory}
+        isAdmin={isAdmin}
+        onLogout={handleLogout}
+        onLoginOpen={() => setIsLoginOpen(true)}
       />
       
-      <div className="flex-grow relative overflow-hidden">
+      {!isInitialized && !isAdmin && (
+        <div className="bg-leather text-parchment py-2 px-8 flex justify-between items-center text-xs uppercase tracking-widest">
+          <div className="flex items-center gap-2">
+            <Info size={14} />
+            <span>Estás viendo la bitácora de demostración (Modo Portfolio)</span>
+          </div>
+          <button 
+            onClick={startMyDiary}
+            className="hover:underline font-bold transition-all"
+          >
+            Empezar MI propio diario
+          </button>
+        </div>
+      )}
         <AnimatePresence mode="wait">
           <motion.div
             key={view}
@@ -647,7 +724,52 @@ export default function App() {
             entry={selectedEntry} 
             onClose={() => setSelectedEntry(null)} 
             onDelete={handleDelete}
+            isAdmin={isAdmin}
           />
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {isLoginOpen && (
+          <motion.div 
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/60 backdrop-blur-md"
+            onClick={() => setIsLoginOpen(false)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, y: 20 }}
+              animate={{ scale: 1, y: 0 }}
+              className="bg-parchment parchment-texture p-12 shadow-2xl border border-leather/30 max-w-md w-full text-center"
+              onClick={e => e.stopPropagation()}
+            >
+              <div className="flex justify-center mb-8">
+                <div className="w-20 h-20 rounded-full bg-leather/10 flex items-center justify-center text-leather">
+                  <Lock size={40} />
+                </div>
+              </div>
+              <h2 className="font-display text-4xl text-ink italic mb-4">Acceso al Cronista</h2>
+              <p className="text-ink/60 italic mb-8">Solo el autor original puede estampar nuevas realidades en el mapa.</p>
+              
+              <form onSubmit={handleLogin} className="space-y-6">
+                <input 
+                  type="password"
+                  placeholder="Introduce la llave..."
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                  autoFocus
+                  className="w-full bg-transparent border-0 border-b-2 border-leather/20 focus:border-leather focus:ring-0 text-center text-2xl font-serif py-2 transition-all"
+                />
+                <button 
+                  type="submit"
+                  className="w-full bg-leather text-parchment py-4 font-display text-xl italic hover:bg-leather/90 transition-all shadow-lg"
+                >
+                  Girar la Llave
+                </button>
+              </form>
+            </motion.div>
+          </motion.div>
         )}
       </AnimatePresence>
 
