@@ -144,14 +144,14 @@ const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: Entry[]
             whileInView={{ opacity: 1, y: 0 }}
             className="text-9xl font-display text-leather italic mb-8"
           >
-            Carta Náutica
+            Topología de Aprendizaje
           </motion.h1>
           <motion.p 
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             className="text-3xl text-ink/40 leading-relaxed italic text-center max-w-2xl"
           >
-            "El conocimiento es un mar sin orillas,<br/>cada nota es un faro en la penumbra."
+            "El conocimiento es un flujo de datos constante,<br/>cada nota es un nodo en la red de aprendizaje."
           </motion.p>
         </section>
 
@@ -255,7 +255,7 @@ const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, sele
       <aside className="w-full lg:w-96 p-8 lg:p-12 border-b lg:border-b-0 lg:border-r border-shadow/20 bg-shadow/5">
         <div className="sticky top-32">
           <h1 className="font-display text-6xl leading-[0.9] tracking-tighter text-ink mb-6">Archivo<br/><span className="italic text-leather">Seleccionado</span></h1>
-          <p className="text-base leading-relaxed text-ink/70 italic mb-12 border-l-2 border-leather/20 pl-6">Un recorrido visual a través de las memorias fragmentadas de un siglo en penumbra.</p>
+          <p className="text-base leading-relaxed text-ink/70 italic mb-12 border-l-2 border-leather/20 pl-6">Un recorrido visual a través de los registros y logs fragmentados de una infraestructura en evolución.</p>
           
           <div className="space-y-12">
             <div className="group">
@@ -306,10 +306,10 @@ const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, sele
       <section className="flex-1 p-8 lg:p-16">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
           <div>
-            <h2 className="font-display text-3xl text-ink font-light">Folios del Siglo XX</h2>
+            <h2 className="font-display text-3xl text-ink font-light">Registros de Sistemas</h2>
             <div className="h-1 w-24 bg-leather mt-2"></div>
           </div>
-          <div className="text-sm italic text-ink/40">Exhibiendo {entries.length} fragmentos de la memoria colectiva.</div>
+          <div className="text-sm italic text-ink/40">Exhibiendo {entries.length} fragmentos de infraestructura técnica.</div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 items-start">
@@ -352,9 +352,9 @@ const ArchiveView = ({ entries, onSelectEntry, searchQuery, setSearchQuery, sele
         </div>
 
         <div className="mt-24 pt-12 border-t border-shadow/20 flex flex-col items-center">
-          <p className="text-base italic text-ink/40 mb-8">El archivo continúa en los sótanos...</p>
+          <p className="text-base italic text-ink/40 mb-8">Los logs continúan en el servidor central...</p>
           <button className="px-16 py-5 bg-transparent border-2 border-leather text-leather font-display text-2xl italic hover:bg-leather hover:text-parchment transition-all duration-500 shadow-sm">
-            Pasar a la siguiente estancia
+            Pasar al siguiente nodo
           </button>
         </div>
       </section>
@@ -439,7 +439,7 @@ const EditorView = ({ onSave, onCancel, initialCoords }: { onSave: (e: Partial<E
             <textarea 
               value={content}
               onChange={e => setContent(e.target.value)}
-              placeholder="El conocimiento se desvanece si no se plasma en papel. Inicia tu relato aquí..."
+              placeholder="La información se pierde si no se registra en caliente. Inicia el log aquí..."
               className="w-full h-full bg-transparent border-0 focus:ring-0 p-0 text-xl text-ink/90 resize-none leading-[2.2rem] placeholder:text-ink/10 scrollbar-hide"
               style={{ backgroundImage: 'repeating-linear-gradient(transparent, transparent 2.2rem, rgba(0,0,0,0.05) 2.2rem, rgba(0,0,0,0.05) 2.25rem)', backgroundSize: '100% 2.25rem' }}
             />
@@ -525,7 +525,7 @@ const DetailView = ({ entry, onClose, onDelete, isAdmin }: { entry: Entry; onClo
                 onClick={() => { onDelete(entry.id); onClose(); }}
                 className="flex items-center gap-2 text-ink/40 hover:text-red-700 transition-colors text-xs uppercase tracking-widest"
               >
-                <Trash2 size={14} /> Quemar Folio
+                <Trash2 size={14} /> Eliminar Registro
               </button>
             )}
           </div>
@@ -750,7 +750,7 @@ export default function App() {
                 </div>
               </div>
               <h2 className="font-display text-4xl text-ink italic mb-4">Acceso al Cronista</h2>
-              <p className="text-ink/60 italic mb-8">Solo el autor original puede estampar nuevas realidades en el mapa.</p>
+              <p className="text-ink/60 italic mb-8">Solo el administrador oficial puede registrar nuevos datos en el sistema.</p>
               
               <form onSubmit={handleLogin} className="space-y-6">
                 <input 
