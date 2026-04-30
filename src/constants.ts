@@ -110,6 +110,72 @@ export const REAL_ENTRIES: Entry[] = [
     coordinates: { x: 85, y: 200 },
     quote: 'Bases de aprendizaje automático para extracción de conocimiento.',
     tags: ['ML', 'Python', 'R']
+  },
+  {
+    id: 'entry-10',
+    title: 'Fase 4: Auditoría Clínica e Ingesta (V2.5)',
+    content: 'Resolución de Auditoría HCE-Comun con cabecera demográfica y visor secuencial. Optimización de ingesta masiva mediante flushing incremental.',
+    date: '21 ABR, 2026',
+    timestamp: new Date('2026-04-21').getTime(),
+    category: 'Proyecto Final',
+    coordinates: { x: 20, y: 230 },
+    quote: 'Resolución de auditoría clínica y optimización de sistemas masivos.',
+    tags: ['Auditoría', 'HCE-Comun', 'BigData']
+  },
+  {
+    id: 'entry-11',
+    title: 'Fase 5: Inteligencia Clínica (V2.6.3)',
+    content: 'Implementación de autocompletado clínico inteligente y motor de resolución booleana estricta para datasets de 100k.',
+    date: '22 ABR, 2026',
+    timestamp: new Date('2026-04-22').getTime(),
+    category: 'Ingeniería',
+    coordinates: { x: 75, y: 260 },
+    quote: 'Evolución a Inteligencia Clínica y precisión para Big Data.',
+    tags: ['Autocomplete', 'Boolean', 'Search']
+  },
+  {
+    id: 'entry-12',
+    title: 'Fase 6: Estabilización y Merge (V2.7.1)',
+    content: 'Implementación de Merge Robusto en IndexedDB para evitar pérdida de datos y validación con pruebas de estrés de 100k.',
+    date: '23 ABR, 2026',
+    timestamp: new Date('2026-04-23').getTime(),
+    category: 'Sistemas',
+    coordinates: { x: 30, y: 290 },
+    quote: 'Estabilización de ingesta masiva e integridad de datos clínicos.',
+    tags: ['Merge', 'IndexedDB', 'StressTest']
+  },
+  {
+    id: 'entry-13',
+    title: 'Fase 7: Clean Architecture (V3.9.0)',
+    content: 'Refactorización total a arquitectura limpia, implementación de Okapi BM25 y Clinical Synonym Mapper.',
+    date: '24 ABR, 2026',
+    timestamp: new Date('2026-04-24').getTime(),
+    category: 'Arquitectura',
+    coordinates: { x: 80, y: 320 },
+    quote: 'Refactorización arquitectónica y motor de búsqueda de 2ª generación.',
+    tags: ['CleanArch', 'BM25', 'Synonyms']
+  },
+  {
+    id: 'entry-14',
+    title: 'Fase 8: Resiliencia y Datos Legacy',
+    content: 'Soporte para decodificación CP850 y exportación Excel nativa. Rediseño de navegación por tomas individuales.',
+    date: '27 ABR, 2026',
+    timestamp: new Date('2026-04-27').getTime(),
+    category: 'DevOps',
+    coordinates: { x: 25, y: 350 },
+    quote: 'Optimización de la UX clínica y robustez en datos heredados.',
+    tags: ['Legacy', 'Excel', 'UX']
+  },
+  {
+    id: 'entry-15',
+    title: 'Fase 12: Consolidación Industrial (V4.2.1)',
+    content: 'Soporte XLSX nativo, buscador ubicuo y navegación ergonómica por teclado. Sellado final del sistema.',
+    date: '30 ABR, 2026',
+    timestamp: new Date('2026-04-30').getTime(),
+    category: 'Proyecto Final',
+    coordinates: { x: 70, y: 380 },
+    quote: 'Consolidación de la interfaz clínica y madurez industrial.',
+    tags: ['V4.2.1', 'Final', 'Industrial']
   }
 ];
 
