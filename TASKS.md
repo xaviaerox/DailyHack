@@ -1,23 +1,26 @@
-# Historial de Tareas - Proyecto Queryclin
+# Historial de Crónicas - Proyecto DailyHack
 
-## 🟢 FASE 1-10: Evolución Histórica (Completadas ✅)
-- [x] Implementación de arquitectura Local-First y motor Booleano.
-- [x] Migración a IndexedDB y Web Workers para 100k registros.
-- [x] Refactorización a Clean Architecture y micro-servicios.
-- [x] Implementación de algoritmo Okapi BM25 y Synonym Mapper.
-
-## 🟣 FASE 11: Modernización y Buscador Ubicuo (V4.2.1 ✅)
-- [x] **U4. Buscador en Cabecera**: Integración centralizada para navegación global.
-- [x] **U5. Asistente de Carga (3 Pasos)**: Simplificación de la UX.
-- [x] **U6. Navegación por Teclado**: Soporte para flechas direccionales.
-
-## 🟡 FASE 12: Estructura Determinista y Legibilidad (ACTUAL ✅)
-- [x] **A14. Orden Estricto de Mapping**: Forzado de la estructura visual según el modelo oficial.
-- [x] **A15. Formateo Inteligente**: Conversión automática de espacios múltiples en párrafos.
-- [x] **A16. Subgrupo de Constantes Vitales**: Implementación de tabla inmutable.
-- [x] **Logro**: El sistema alcanza madurez industrial lista para producción.
+Este archivo mantiene el registro acumulativo de la construcción de la Crónica Atemporal.
 
 ---
-## 🟡 PRÓXIMOS OBJETIVOS (2026+)
-- [ ] **E11. Motor Semántico Híbrido**: Integración de embeddings locales.
-- [ ] **E15. IA Generativa Local**: Resúmenes automáticos mediante LLM en el cliente.
+
+## 🟢 FASE 1: El Despertar del Cronista (V1.0 - V3.0)
+- [x] Creación del motor de visualización basado en React.
+- [x] Implementación del sistema de coordenadas para el mapa topológico.
+- [x] Desarrollo de la estética "Pergamino" inicial.
+- [x] **Logro**: Visualización de hitos históricos de aprendizaje.
+
+## 🟢 FASE 2: Automatización y Sincronía (V4.0 - V5.0)
+- [x] Desarrollo de `sync_diary.cjs` para parseo automático de Markdown.
+- [x] Implementación del vigía en tiempo real (`watch_diary.cjs`).
+- [x] Integración con Framer Motion para el dibujo dinámico del camino.
+- [x] **Logro**: El mapa se construye solo al escribir en el diario maestro.
+
+## 🔵 FASE 3: Refactor y Purga (V6.0.0 — ACTUAL 🚀)
+- [x] **R1. Independencia de Repositorio**: Eliminadas todas las referencias a proyectos externos (Queryclin).
+- [x] **R2. Limpieza Documental**: Reescritura de AGENT, RULES y TASKS para enfoque 100% pirata.
+- [x] **R3. Optimización de App.tsx**: Eliminados tags y metadatos clínicos del buscador y filtros.
+- [ ] **A1. Resúmenes de Recalada**: (Opcional) Integrar IA local para resumir la jornada.
+
+---
+*La Crónica Atemporal - Mapa de Navegación del Conocimiento*

@@ -1,33 +1,31 @@
-# Reglas Estrictas del Proyecto (Queryclin)
+# Reglas Estrictas del Proyecto (DailyHack) 🏴‍☠️
 
-Este documento contiene las directrices fundamentales e inviolables para el desarrollo de este proyecto. Ningún agente ni desarrollador debe ignorar estas reglas. Este archivo actúa como la "Constitución" del repositorio.
-
----
-
-## 1. Actualización Continua del Changelog
-- **Regla:** Todo cambio procesado (bugs, features, refactorizaciones) **DEBE** registrarse de manera autónoma en `CHANGELOG.md`.
-
-## 2. Persistencia Histórica en TASKS.md
-- **Regla:** **PROHIBIDO** borrar tareas completadas en `TASKS.md`. Este archivo debe ser un historial acumulativo de todas las fases del proyecto.
-
-## 3. Integridad Estructural y Orden
-- **Regla:** Ningún archivo de prueba, script de generación o dataset CSV puede residir en la raíz del proyecto.
-- **Ubicación:** 
-    - Scripts auxiliares: `/scripts`
-    - Datos de prueba: `/tests/data`
-    - Documentación técnica: `/docs`
-
-## 4. Identidad del Proyecto (Queryclin)
-- **Regla:** El proyecto tiene el nombre oficial y exclusivo de **Queryclin**. No se deben usar nombres anteriores en código o documentación.
-
-## 5. Sincronía de Versión (WebApp)
-- **Regla:** Tras cada cierre de fase o solución de fallo crítico, la versión visible en la interfaz (Header) debe incrementarse.
-
-## 6. Fidelidad del Dato Clínico
-- **Regla:** Se prohíbe renombrar o normalizar destructivamente los campos originales del CSV.
-
-## 7. Principio de Escala y Resiliencia
-- **Regla:** Priorizar siempre el procesamiento asíncrono y la persistencia fragmentada en IndexedDB (>100k registros).
+Este documento contiene las directrices fundamentales e inviolables para el desarrollo de la Crónica Atemporal. Este archivo actúa como la "Constitución" del repositorio y garantiza que el proyecto mantenga su esencia de diario de aprendizaje pirata.
 
 ---
-*Gobernanza Queryclin - V4.2.1*
+
+## 1. Actualización Continua del Registro
+- **Regla:** Todo cambio técnico o estético **DEBE** registrarse de manera autónoma en `CHANGELOG.md`.
+- **Formato:** Los registros deben ser narrativos cuando sea posible, manteniendo el tono de "bitácora de navegación".
+
+## 2. Persistencia en TASKS.md
+- **Regla:** **PROHIBIDO** borrar tareas completadas. Este archivo es el historial evolutivo del mapa de aprendizaje.
+
+## 3. Independencia Absoluta
+- **Regla:** Queda terminantemente prohibido incluir código, comentarios, mappings o lógica de otros proyectos (ej. Queryclin, HCE Core).
+- **Justificación:** DailyHack es un proyecto personal e independiente de visualización.
+
+## 4. Estética Pirata Inmutable (Vibe Preservation)
+- **Regla:** Toda nueva funcionalidad debe respetar el *Design System* pirata:
+    - Colores: Paleta de pergamino (`#f4ead5`), sepia (`#8b5e34`) y café oscuro (`#5d4037`).
+    - Tipografía: Estilo clásico, itálico y con espaciado elegante.
+    - Elementos: Uso de iconografía náutica y texturas de papel hecho a mano.
+
+## 5. Sincronía con el Diario Maestro
+- **Regla:** El sistema debe retroalimentarse exclusivamente del archivo `DIARIO_APRENDIZAJE.md`. No se deben crear bases de datos pesadas ni sistemas de ingesta complejos fuera de los scripts de sincronización.
+
+## 6. Identidad de Versión
+- **Regla:** La versión actual del proyecto se rige por los hitos del aprendizaje del cronista, no por ciclos de software comercial.
+
+---
+*Gobernanza de la Crónica Atemporal - V1.0.0*

@@ -1,0 +1,318 @@
+[
+  {
+    "id": "entry-0",
+    "title": "Bienvenida y Presentación (Día 0)",
+    "content": "Recepción inicial, conocimiento del entorno hospitalario y definición de funciones.   - Acto de bienvenida por parte de la coordinación del centro. - Tour por las instalaciones del **Hospital Rafael Méndez**. - Presentación del equipo técnico y asignación de las primeras funciones y objetivos del pe...",
+    "date": "07 ABR, 2026",
+    "timestamp": 1775520000000,
+    "category": "General",
+    "coordinates": {
+      "x": 27,
+      "y": 5
+    },
+    "quote": "Sesión de bienvenida y orientación profesional.",
+    "tags": []
+  },
+  {
+    "id": "entry-1",
+    "title": "Fase 0: Configuración y Fundamentos",
+    "content": "Establecimiento del entorno de desarrollo y toma de contacto con el flujo de trabajo ASIR.   - Inicialización de la estructura de carpetas `FEM2_Practicas_ASIR`. - Desarrollo de laboratorios iniciales: `01_TodoApp` y `02_DashboardEditorial`. - Configuración de Git y perfiles de desarrollador.",
+    "date": "08 ABR, 2026",
+    "timestamp": 1775606400000,
+    "category": "Sistemas",
+    "coordinates": {
+      "x": 79,
+      "y": 35
+    },
+    "quote": "Configuración del entorno de prácticas y desarrollo de utilidades base.",
+    "tags": []
+  },
+  {
+    "id": "entry-2",
+    "title": "Fase 0.5: Inmersión Técnica y Labs Intensivos",
+    "content": "Consolidación de lógica de programación en JavaScript y gestión de reglas de gobernanza.   - Implementación de laboratorios de lógica aplicada: `Control de Gastos`, `Generador de Contraseñas`, `Conversor de Monedas`, `BabyTracker` y `App del Tiempo`. - Inicio del desarrollo del `08_Portfolio` person...",
+    "date": "09 ABR, 2026",
+    "timestamp": 1775692800000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 12,
+      "y": 65
+    },
+    "quote": "",
+    "tags": []
+  },
+  {
+    "id": "entry-3",
+    "title": "Inicio de Proyecto Final (Queryclin) y Máster en Antigravity",
+    "content": "Conceptualización del Buscador Clínico y finalización de la especialización en desarrollo asistido por agentes.   - Definición del alcance del proyecto final en la carpeta `00_Proyecto_Final`. - Análisis de requerimientos para el manejo de Historias Clínicas Electrónicas (HCE). - Finalización del **...",
+    "date": "13 ABR, 2026",
+    "timestamp": 1776038400000,
+    "category": "General",
+    "coordinates": {
+      "x": 75,
+      "y": 95
+    },
+    "quote": "Inicio de proyecto final y especialización en desarrollo agentic-first.",
+    "tags": []
+  },
+  {
+    "id": "entry-4",
+    "title": "Fase de Auditoría y Despliegue de Entorno",
+    "content": "Asegurar la portabilidad y seguridad del sistema antes del desarrollo masivo.   - Auditoría técnica del sistema para integración con Node.js portable por restricciones de entorno. - Validación de despliegue en local-first para cumplimiento estricto de privacidad.",
+    "date": "15 ABR, 2026",
+    "timestamp": 1776211200000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 13,
+      "y": 125
+    },
+    "quote": "Definición del proyecto final y auditoría de portabilidad de sistemas.",
+    "tags": [
+      "NodeJS"
+    ]
+  },
+  {
+    "id": "entry-5",
+    "title": "Fase 1: Análisis y Arquitectura Base",
+    "content": "Migrar una arquitectura básica a un sistema premium de búsqueda clínica.   - Definición de la estructura de datos para Historias Clínicas Electrónicas (HCE). - Implementación inicial de búsqueda semántica local. - Configuración de IndexedDB para persistencia persistente.  **Lecciones Técnicas**: - G...",
+    "date": "16 ABR, 2026",
+    "timestamp": 1776297600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 84,
+      "y": 155
+    },
+    "quote": "Diseño y fundamentación de la arquitectura Local-First.",
+    "tags": []
+  },
+  {
+    "id": "entry-6",
+    "title": "Fase 2: Optimización de Ingesta y Versionado (V2.1)",
+    "content": "Adaptar el sistema a formatos de exportación heredados y establecer gobernanza.   - Adaptación del parser CSV para soportar separadores de tubería (`|`). - Implementación de un sistema de versionado visual (V2.1). - Automatización de despliegue con GitHub Actions.  **Lecciones Técnicas**: - Gestión ...",
+    "date": "17 ABR, 2026",
+    "timestamp": 1776384000000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 20,
+      "y": 185
+    },
+    "quote": "Optimización de ingesta de datos y automatización de despliegue.",
+    "tags": []
+  },
+  {
+    "id": "entry-7",
+    "title": "Fase 3: Ultra-Escalabilidad, Calidad y Formación IA (V2.3)",
+    "content": "Superar los límites de memoria, implementar aseguramiento de calidad y formación en pre-procesamiento de datos.   - **Ultra-Escalabilidad**: Implementación de fragmentación de metadatos (Local Sharding) y ajuste de tokenización clínica para indexar términos cortos (`pH`, `O2`). - **Calidad y Testing...",
+    "date": "20 ABR, 2026",
+    "timestamp": 1776643200000,
+    "category": "IA",
+    "coordinates": {
+      "x": 86,
+      "y": 215
+    },
+    "quote": "",
+    "tags": [
+      "Vite"
+    ]
+  },
+  {
+    "id": "entry-8",
+    "title": "Fase 4: Resolución de Auditoría Clínica e Ingesta Masiva (V2.5)",
+    "content": "Superar la auditoría clínica hospitalaria y resolver cuellos de botella técnicos en la ingesta de grandes volúmenes de datos.   - **Resolución de Auditoría HCE-Comun**: Re-arquitectura de la interfaz para incluir cabecera demográfica dinámica (Edad, Sexo, CP) y eliminación de pestañas redundantes. -...",
+    "date": "21 ABR, 2026",
+    "timestamp": 1776729600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 18,
+      "y": 245
+    },
+    "quote": "Resolución de auditoría clínica y optimización de sistemas masivos de datos.",
+    "tags": []
+  },
+  {
+    "id": "entry-9",
+    "title": "Fase 5: Inteligencia Clínica y Sellado del Motor (V2.6.3)",
+    "content": "Implementar sistemas de ayuda inteligente (Autocompletado) y asegurar la precisión matemática del motor de búsqueda ante el reto de los 100.000 registros.   - **Autocompletado Clínico Inteligente**: Desarrollo de un motor de sugerencias basado en muestreo heurístico (Sampling de 10k) para mantener l...",
+    "date": "22 ABR, 2026",
+    "timestamp": 1776816000000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 72,
+      "y": 275
+    },
+    "quote": "Evolución a Inteligencia Clínica y Optimización de Precisión para Big Data.",
+    "tags": []
+  },
+  {
+    "id": "entry-10",
+    "title": "Fase 6: Estabilización de Ingesta y Gobernanza de Datos (V2.7.1)",
+    "content": "Resolver la pérdida de datos en ingestas masivas y asegurar la integridad de la historia clínica cuando los registros están fragmentados.   - **Implementación de Merge Robusto**: Refactorización del Web Worker para incluir un ciclo de \"Lectura-Fusión-Escritura\" en IndexedDB, evitando que los lotes d...",
+    "date": "23 ABR, 2026",
+    "timestamp": 1776902400000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 16,
+      "y": 305
+    },
+    "quote": "Estabilización de Ingesta Masiva e Integridad de Datos Clínicos (V2.7.1).",
+    "tags": []
+  },
+  {
+    "id": "entry-11",
+    "title": "Fase 7: Arquitectura Solid-State y Motor de 2ª Generación (V3.9.0)",
+    "content": "Evolucionar el sistema de un buscador léxico básico a un motor de recuperación de información de grado profesional (IR) mediante refactorización estructural y algoritmos avanzados.   - **Refactorización a Clean Architecture**: Desmantelamiento del monolito `src/lib/` y separación en capas de respons...",
+    "date": "24 ABR, 2026",
+    "timestamp": 1776988800000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 77,
+      "y": 335
+    },
+    "quote": "Refactorización Arquitectónica y Motor de Búsqueda de Segunda Generación (V3.9.0).",
+    "tags": []
+  },
+  {
+    "id": "entry-12",
+    "title": "Fase 8: Sincronización y Robustez de Datos Reales",
+    "content": "Asegurar la compatibilidad del motor con datasets clínicos originales y mejorar la exportación de datos.   - Implementación de un sistema de decodificación resiliente en `App.tsx` para soportar archivos `ISO-8859-1` (sistemas hospitalarios antiguos), solucionando fallos en caracteres especiales. - R...",
+    "date": "27 ABR, 2026",
+    "timestamp": 1777248000000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 28,
+      "y": 365
+    },
+    "quote": "Optimización de la experiencia de usuario clínica y robustez en la ingesta de datos heredados.",
+    "tags": []
+  },
+  {
+    "id": "entry-13",
+    "title": "Fase 12: Consolidación Industrial y UX Avanzada (V4.2.1)",
+    "content": "Culminar la modernización del sistema, asegurar la legibilidad de datos masivos y optimizar la ergonomía de uso para el facultativo.   - **Soporte Nativo XLSX**: Implementación de la librería `xlsx` para permitir la ingesta directa de hojas de cálculo sin conversión previa, detectando automáticament...",
+    "date": "30 ABR, 2026",
+    "timestamp": 1777507200000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 74,
+      "y": 395
+    },
+    "quote": "Consolidación de la interfaz clínica y soporte nativo para análisis de hojas de cálculo.",
+    "tags": [
+      "React"
+    ]
+  },
+  {
+    "id": "entry-14",
+    "title": "Fase 13: Sincronización, Gobernanza y Búsqueda Contextual (V4.2.5)",
+    "content": "Establecer protocolos de versión estricta y perfeccionar el motor de búsqueda bidireccional con resaltado inteligente.   - **Gobernanza de Versión**: Unificación de la versión **V4.2.3** en todo el ecosistema (UI, README, RULES). Implementación de la \"Regla de Sincronización Global\". - **Búsqueda Co...",
+    "date": "05 MAY, 2026",
+    "timestamp": 1777939200000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 17,
+      "y": 425
+    },
+    "quote": "Gobernanza de sistemas y optimización de precisión clínica.",
+    "tags": []
+  },
+  {
+    "id": "entry-15",
+    "title": "Fase 20: Refinamiento de Mappings e Integridad de Persistencia (V4.3.8)",
+    "content": "Eliminar campos huérfanos del formulario HCE-MIR, depurar metadatos técnicos y garantizar la unicidad de contextos en búsquedas recientes.   - **Refinamiento HCE-MIR**: Mapeo determinista de campos críticos como \"Resultado Analítica\", \"Tratamiento Previo\", \"Oxihemoglobina (O2 Hb)\", \"Situación Basal ...",
+    "date": "06 MAY, 2026",
+    "timestamp": 1778025600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 72,
+      "y": 455
+    },
+    "quote": "Optimización de la fidelidad del informe clínico y persistencia de contextos.",
+    "tags": []
+  },
+  {
+    "id": "entry-16",
+    "title": "Finalización de Formación en Machine Learning",
+    "content": "Culminar la especialización técnica en algoritmos de aprendizaje automático para su futura integración en el análisis clínico.   - Finalización del curso: **Machine Learning A-",
+    "date": "07 MAY, 2026",
+    "timestamp": 1778112000000,
+    "category": "IA",
+    "coordinates": {
+      "x": 15,
+      "y": 485
+    },
+    "quote": "",
+    "tags": []
+  },
+  {
+    "id": "entry-17",
+    "title": "Fase 21: Gobernanza HCE-OBS, Jerarquía Clínica y Automatización Total (V4.7.5)",
+    "content": "Estabilizar el módulo HCE-OBS, implementar una taxonomía jerárquica y automatizar la gestión de versiones para eliminar errores humanos.   - **Jerarquía HCE-OBS**: Implementación de un motor de renderizado determinista que agrupa campos en un modelo de dos niveles (Categoría - **Limpieza Dinámica de...",
+    "date": "07 MAY, 2026",
+    "timestamp": 1778112000000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 85,
+      "y": 515
+    },
+    "quote": "Estabilización de la jerarquía clínica y automatización de la gobernanza de software.",
+    "tags": [
+      "Vite"
+    ]
+  },
+  {
+    "id": "entry-18",
+    "title": "Fase 22: Exportación Controlada, Reestructuración IA y Seguridad Pública (V5.0.0)",
+    "content": "Implementar exportación selectiva de datos, consolidar el ecosistema de gobernanza para agentes de IA y blindar el repositorio para su publicación en entorno público.   - **Exportación de \"Última Toma\" (V4.8.0)**: Desarrollo de un motor de consolidación determinista que permite exportar un único reg...",
+    "date": "08 MAY, 2026",
+    "timestamp": 1778198400000,
+    "category": "Seguridad",
+    "coordinates": {
+      "x": 18,
+      "y": 545
+    },
+    "quote": "Gobernanza de Seguridad Pública, Privacidad IA y Exportación Selectiva (V5.0.0).",
+    "tags": []
+  },
+  {
+    "id": "entry-19",
+    "title": "Fase 27: Debug Mode y Refinamiento de Taxonomía Clínica (V5.2.0)",
+    "content": "Implementar herramientas de auditoría técnica y depurar la visualización de campos para una precisión clínica absoluta.   - **Modo Debug Persistente**: Implementación de un toggle en el GlobalHeader para alternar entre visualización clínica normal y auditoría técnica de campos no mapeados. - **Rende...",
+    "date": "11 MAY, 2026",
+    "timestamp": 1778457600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 83,
+      "y": 575
+    },
+    "quote": "Herramientas de Auditoría Técnica y Refinamiento de la Taxonomía Clínica (V5.2.0).",
+    "tags": []
+  },
+  {
+    "id": "entry-20",
+    "title": "Fase 28: Refactor Semántico y Búsqueda Estructural (V5.3.0)",
+    "content": "Centralizar la inteligencia lingüística del sistema y eliminar cuellos de botella de rendimiento en el filtrado de grandes datasets.   - **Fundación Semántica**: Creación de `SemanticProcessor.ts` para centralizar la tokenización clínica (preservando símbolos vitales como `Na+`, `O2Hb`), el stemming...",
+    "date": "12 MAY, 2026",
+    "timestamp": 1778544000000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 26,
+      "y": 605
+    },
+    "quote": "Implementación de Motor Semántico Estructurado y Optimización Extrema de Rendimiento (V5.3.0).",
+    "tags": []
+  },
+  {
+    "id": "entry-21",
+    "title": "Fase 29: Queryclin Admin Studio & Gobernanza de Instrucciones (V6.0.0)",
+    "content": "Evolucionar el sistema a una plataforma de diseño clínico dinámico y establecer un repositorio de trazabilidad para instrucciones de IA.   - **Admin Studio Core**: Implementación del `FormDesigner` con un motor de **Drag-and-Drop bidireccional** total. Los usuarios ahora pueden diseñar formularios c...",
+    "date": "13 MAY, 2026",
+    "timestamp": 1778630400000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 87,
+      "y": 635
+    },
+    "quote": "Finalización del Admin Studio y Fortalecimiento de la Gobernanza de Software (V6.0.0).",
+    "tags": []
+  }
+]

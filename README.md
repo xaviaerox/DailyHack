@@ -1,67 +1,60 @@
-# Queryclin — HCE Intelligence Dashboard (V4.2.1)
+# La Crónica Atemporal — DailyHack (V6.0.0) 🏴‍☠️
 
-Queryclin es una plataforma de exploración y análisis de **Historias Clínicas Electrónicas (HCE)** diseñada bajo principios de **privacidad absoluta y rendimiento local**. Permite al personal clínico navegar, buscar y segmentar grandes volúmenes de datos directamente en el navegador sin dependencias de red.
+**La Crónica Atemporal** es un sistema de visualización de aprendizaje "Pirata" diseñado para mapear el crecimiento intelectual y técnico de forma dinámica. No es solo un portafolio; es una bitácora de navegación que se autogestiona a partir de los registros diarios.
 
 ---
 
-## 1. El Problema y Nuestro Propósito
-El personal médico se ve frecuentemente forzado a lidiar con exportaciones masivas de HCE en formatos crudos (Texto plano o Excel). Interpretar estas sábanas de datos genera una inmensa fatiga visual y riesgo de errores. 
+## 🗺️ Visión del Proyecto
+Este proyecto transforma un diario de aprendizaje convencional (`DIARIO_APRENDIZAJE.md`) en un mapa topológico interactivo. Cada hito, curso o proyecto se convierte en una recalada en el vasto océano del conocimiento.
 
-**Queryclin** nació con la misión de construir un motor que permitiera la navegación fluida y la búsqueda contextual profunda en vastos expedientes en milisegundos.
+> [!TIP]
+> **Autogestión Total:** El sistema se actualiza automáticamente mediante un motor de sincronización que parsea el diario maestro, eliminando la necesidad de actualizaciones manuales en el código.
+
+---
+
+## ⚓ Características de la Travesía
+
+- **Mapa de Indagaciones:** Una vista topológica con estética de pergamino antiguo, donde el camino se traza dinámicamente.
+- **Archivos Centrales:** Un buscador tipo "Library" para filtrar crónicas por conceptos, categorías o etiquetas.
+- **Estética "Pirata" Premium:** Uso de texturas de pergamino, tipografía clásica, elementos náuticos y animaciones fluidas con `motion`.
+- **Sincronización Automatizada:** Script `npm run sync-diary` que transforma el markdown en datos estructurados.
+- **X Marks the Spot:** Resaltado dinámico de la última recalada (último avance registrado).
+
+---
+
+## 🛠️ Stack Tecnológico
+
+- **Núcleo:** React 19 + TypeScript.
+- **Estética:** Tailwind CSS + Framer Motion (Motion).
+- **Iconografía:** Lucide React (Nautical Set).
+- **Datos:** Motor de parseo en Node.js para sincronización de Markdown.
+- **Despliegue:** Optimizado para GitHub Pages.
+
+---
+
+## 📜 Instrucciones de Navegación
+
+### Para el Cronista (Desarrollo)
+1.  **Inicia el Sistema:** Ejecuta `npm run dev:full`. Esto arrancará el servidor y el vigía automático.
+2.  **Escribe en el Diario:** Modifica `../DIARIO_APRENDIZAJE.md`. El mapa se actualizará al instante.
+3.  **Visualiza:** Abre tu navegador y observa cómo crece el camino.
+
+> [!TIP]
+> **Git Hook Activo:** Se ha configurado un hook de Git que sincroniza el diario automáticamente antes de cada commit para asegurar que el repositorio siempre esté en orden.
+
+### Acceso al Cuarto de Mapas (Admin)
+El modo edición está protegido por una "Llave Sagrada". Solo el cronista oficial puede registrar nuevos fragmentos directamente desde la interfaz.
+
+---
+
+## 🤖 Gobernanza IA
+
+Este proyecto es un ejemplo de **Vibe Coding** y **Spec-Driven Development**. Está diseñado para ser mantenido por agentes de IA como **Antigravity**, siguiendo las reglas estrictas definidas en:
+- `RULES.md`: La "Constitución" del proyecto.
+- `AGENT.MD`: El contexto operativo para la IA.
+- `CHANGELOG.md`: El registro de batalla cronológico.
+
+---
 
 > [!IMPORTANT]
-> **Privacidad Local-First:** Debido a la sensibilidad de los datos médicos, la arquitectura es estrictamente local. Los datos jamás abandonan la computadora; todo el procesamiento se realiza en la base de datos del cliente (IndexedDB) y la memoria del navegador.
-
----
-
-## 2. Génesis del Proyecto
-La visión original se basó en transformar la experiencia de auditoría clínica:
-- **Simplicidad de Uso:** Un buscador central limpio que acepta la carga de archivos por arrastre.
-- **Arquitectura de Escala (v3):** Capacidad para gestionar hasta **100.000 pacientes** de forma fluida mediante procesamiento paralelo (Web Workers).
-- **Sintaxis Booleana Estricta:** Motor de búsqueda que soporta lógica natural (`diabetes AND asma NOT fumador`).
-- **Navegación de Toma Única Activa (v4):** Rediseño del visor HCE para centrar la atención en una única sesión clínica, con timeline lateral para navegación cronológica rápida.
-- **Exportación Profesional (v4):** Motor de exportación nativo a formato **Excel (.xlsx)** para facilitar el análisis externo por parte de los facultativos.
-- **Resiliencia de Codificación:** Transcodificación automática (UTF8/Windows-1252/CP850) para archivos heredados de sistemas hospitalarios antiguos.
-
----
-
-## 3. Arquitectura y Stack Tecnológico (V4.2.1)
-El stack se compone de una **Arquitectura Limpia (Clean Architecture)** desacoplada:
-
-- **React 19 + TypeScript:** Esquema de datos estricto para garantizar la integridad clínica.
-- **Capa de Dominio (`src/core/`):** Modelos de datos y taxonomía clínica unificada.
-- **Capa de Aplicación e Ingesta (`src/ingestion/`):** Workers de procesamiento paralelo y streaming de datos tabulares.
-- **Capa de Infraestructura y Storage (`src/storage/`):** Persistencia en IndexedDB con fragmentación inteligente.
-- **Motor de Búsqueda Clínico (`src/engine/`):** 
-  - *`IndexerService.ts`*: Ingesta asíncrona con seguimiento de longitudes para BM25.
-  - *`QueryEngine.ts`*: Motor de recuperación de información basado en **Okapi BM25**.
-  - *`Tokenizer.ts`*: Procesamiento lingüístico con **Clinical Synonym Mapper** y expansión de consultas.
-
----
-
-## 4. Evolución de Características (Roadmap)
-
-### Fase 1-11: Evolución del Motor (Completadas ✅)
-- Desde la arquitectura base hasta la implementación de **Okapi BM25** y **Clinical Synonym Mapper**.
-- Resolución de auditorías clínicas y optimización para 100k+ registros.
-
-### Fase 12: Estructura Determinista y Legibilidad (V4.2.1 - ACTUAL ✅)
-- **Orden Clínico Estricto**: Visualización determinista de campos siguiendo el mapping oficial.
-- **Subgrupo de Constantes**: Tablas inmutables para parámetros biométricos (IMC, constantes).
-- **Formateo Inteligente**: Conversión automática de espacios múltiples en párrafos legibles.
-- **Navegación Ergonómica**: Soporte para flechas de teclado.
-- **Buscador Ubicuo**: Acceso global desde la cabecera.
-- **Soporte XLSX**: Ingesta nativa de Excel.
-
----
-
-## 5. Instrucciones de Uso y Despliegue
-1. Instalar dependencias: `npm install`
-2. Iniciar servidor de desarrollo: `npm run dev`
-
----
-
-## 6. Estructura y Gobernanza
-- **[RULES.md](RULES.md)**: El marco de gobernanza estricta.
-- **[CHANGELOG.md](CHANGELOG.md)**: Registro histórico de modificaciones.
-- **[TASKS.md](TASKS.md)**: Historial de tareas y objetivos.
+> **Hic Sunt Dracones:** Más allá de los registros, se encuentra el aprendizaje continuo. Cada error es un arrecife sorteado; cada éxito, una isla conquistada.
