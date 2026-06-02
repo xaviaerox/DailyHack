@@ -17,8 +17,8 @@ export function groupEntriesIntoChapters(entries: any[]): any[] {
       id: `chapter-${i}`,
       title: `Travesía ${(i/chunkSize) + 1}`,
       days: chunk,
-      // We can assign coordinates based on index or just spread them vertically
-      coordinates: { x: 50 + (i % 2 === 0 ? -20 : 20), y: (i/chunkSize) * 20 }
+      // Alternating distinctly left and right: 25% or 75%
+      coordinates: { x: (i / chunkSize) % 2 === 0 ? 25 : 75, y: (i/chunkSize) * 25 }
     });
   }
   return chapters;

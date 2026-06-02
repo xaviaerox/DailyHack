@@ -148,18 +148,20 @@ export const PirateMap = ({ entries, onSelectEntry }: { entries: Entry[]; onSele
         viewBox={`0 0 100 ${containerHeight}`} 
         preserveAspectRatio="none"
       >
-        {/* Background track */}
+        {/* Background track (Prominent dashed line between islands) */}
         <path 
           d={pathData}
-          className="stroke-[#8b5e34] stroke-[0.15] fill-none opacity-20"
-          strokeDasharray="1 2"
+          className="stroke-[#8b5e34] stroke-[0.4] fill-none opacity-40"
+          strokeDasharray="6 12"
+          strokeLinecap="round"
         />
-        {/* Active track */}
+        {/* Active track (Ship path) */}
         <motion.path 
           d={pathData}
           style={{ pathLength: shipProgress }}
-          className="stroke-[#b22222] stroke-[0.3] fill-none drop-shadow-md"
-          strokeDasharray="2 3"
+          className="stroke-[#b22222] stroke-[0.6] fill-none drop-shadow-md"
+          strokeDasharray="6 12"
+          strokeLinecap="round"
         />
       </svg>
 
