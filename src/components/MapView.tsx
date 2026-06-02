@@ -103,7 +103,7 @@ export const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: 
               
               if (sorted.length < 1) return "";
               
-              let d = \`M \${sorted[0].coordinates!.x} \${sorted[0].coordinates!.y * 15 + 600}\`;
+              let d = `M ${sorted[0].coordinates!.x} ${sorted[0].coordinates!.y * 15 + 600}`;
               for (let i = 1; i < sorted.length; i++) {
                 const prev = sorted[i-1].coordinates!;
                 const curr = sorted[i].coordinates!;
@@ -112,11 +112,11 @@ export const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: 
                 const cy = curr.y * 15 + 600;
                 
                 // Curve calculation
-                d += \` C \${prev.x} \${py + (cy - py) / 2}, \${cx} \${py + (cy - py) / 2}, \${cx} \${cy}\`;
+                d += ` C ${prev.x} ${py + (cy - py) / 2}, ${cx} ${py + (cy - py) / 2}, ${cx} ${cy}`;
               }
               // Extend to bottom with a slight wobble
               const last = sorted[sorted.length-1].coordinates!;
-              d += \` L \${last.x} \${containerHeight}\`;
+              d += ` L ${last.x} ${containerHeight}`;
               return d;
             }, [entries, containerHeight])}
             className="stroke-[#8b5e34] stroke-[0.4] fill-none opacity-30"
@@ -138,7 +138,7 @@ export const MapView = ({ entries, onSelectEntry, onAddAtLocation }: { entries: 
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.5 }}
               className="absolute group z-20"
-              style={{ top: \`\${y}px\`, left: \`\${x}%\` }}
+              style={{ top: `${y}px`, left: `${x}%` }}
             >
               <div className="relative">
                  {/* Point Mark */}
