@@ -11,3 +11,10 @@ export interface Entry {
   quote?: string;
   tags?: string[];
 }
+
+export interface Chapter {
+  id: string;
+  title: string;
+  days: Entry[];
+  coordinates?: { x: number; y: number };
+}

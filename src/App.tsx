@@ -6,7 +6,8 @@ import { SAMPLE_ENTRIES } from './constants';
 import DIARY_DATA from './data/entries.json';
 
 import { Navbar, Footbar } from './components/Navigation';
-import { MapView } from './components/MapView';
+import { PirateMap } from './components/map/PirateMap';
+import { ScrollContainer } from './components/layout/ScrollContainer';
 import { ArchiveView } from './components/ArchiveView';
 import { EditorView } from './components/EditorView';
 import { DetailView } from './components/DetailView';
@@ -25,7 +26,6 @@ export default function App() {
     if (localStorage.getItem('dailyhack_initialized') === 'true') {
       return saved ? JSON.parse(saved) : SAMPLE_ENTRIES;
     }
-    // Convert coordinate format if necessary (v5 expects it from the script)
     return DIARY_DATA as Entry[];
   });
   
@@ -58,7 +58,7 @@ export default function App() {
   };
 
   const startMyDiary = () => {
-    if (confirm('¿Deseas vaciar las crónicas de ejemplo y empezar tu propia bitácora personal? (Tus datos se guardarán localmente en este navegador).')) {
+    if (confirm('¿Deseas vaciar las crónicas de ejemplo y empezar tu propia bitácora personal?')) {
       setIsInitialized(true);
       localStorage.setItem('dailyhack_initialized', 'true');
       setEntries(SAMPLE_ENTRIES);
@@ -142,11 +142,12 @@ export default function App() {
             className="w-full h-full"
           >
             {view === 'map' && (
-              <MapView 
-                entries={entries} 
-                onSelectEntry={setSelectedEntry} 
-                onAddAtLocation={handleAddAtLocation}
-              />
+              <ScrollContainer>
+                <PirateMap 
+                  entries={entries} 
+                  onSelectEntry={setSelectedEntry} 
+                />
+              </ScrollContainer>
             )}
             {view === 'archive' && (
               <ArchiveView 
@@ -229,7 +230,6 @@ export default function App() {
       </AnimatePresence>
 
       {view !== 'editor' && <Footbar currentView={view} setView={setView} />}
-
     </div>
   );
 }
