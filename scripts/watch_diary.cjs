@@ -3,7 +3,7 @@ const path = require('path');
 const { exec } = require('child_process');
 
 // Ruta al diario de aprendizaje (un nivel arriba)
-const targetFile = path.resolve(__dirname, '../DIARIO_APRENDIZAJE.md');
+const targetFile = path.resolve(__dirname, '../docs/DIARIO_APRENDIZAJE.md');
 const syncScript = path.resolve(__dirname, 'sync_diary.cjs');
 
 console.log('---------------------------------------------------------');

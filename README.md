@@ -50,9 +50,9 @@ El modo edición está protegido por una "Llave Sagrada". Solo el cronista ofici
 ## 🤖 Gobernanza IA
 
 Este proyecto es un ejemplo de **Vibe Coding** y **Spec-Driven Development**. Está diseñado para ser mantenido por agentes de IA como **Antigravity**, siguiendo las reglas estrictas definidas en:
-- `RULES.md`: La "Constitución" del proyecto.
-- `AGENT.MD`: El contexto operativo para la IA.
-- `CHANGELOG.md`: El registro de batalla cronológico.
+- `docs/RULES.md`: La "Constitución" del proyecto.
+- `docs/AGENT.MD`: El contexto operativo para la IA.
+- `docs/CHANGELOG.md`: El registro de batalla cronológico.
 
 ---
 

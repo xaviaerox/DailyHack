@@ -21,7 +21,7 @@
     "timestamp": 1775606400000,
     "category": "Sistemas",
     "coordinates": {
-      "x": 79,
+      "x": 83,
       "y": 35
     },
     "quote": "Configuración del entorno de prácticas y desarrollo de utilidades base.",
@@ -49,7 +49,7 @@
     "timestamp": 1776038400000,
     "category": "General",
     "coordinates": {
-      "x": 75,
+      "x": 81,
       "y": 95
     },
     "quote": "Inicio de proyecto final y especialización en desarrollo agentic-first.",
@@ -63,7 +63,7 @@
     "timestamp": 1776211200000,
     "category": "Fases",
     "coordinates": {
-      "x": 13,
+      "x": 16,
       "y": 125
     },
     "quote": "Definición del proyecto final y auditoría de portabilidad de sistemas.",
@@ -79,7 +79,7 @@
     "timestamp": 1776297600000,
     "category": "Fases",
     "coordinates": {
-      "x": 84,
+      "x": 85,
       "y": 155
     },
     "quote": "Diseño y fundamentación de la arquitectura Local-First.",
@@ -93,7 +93,7 @@
     "timestamp": 1776384000000,
     "category": "Fases",
     "coordinates": {
-      "x": 20,
+      "x": 28,
       "y": 185
     },
     "quote": "Optimización de ingesta de datos y automatización de despliegue.",
@@ -107,7 +107,7 @@
     "timestamp": 1776643200000,
     "category": "IA",
     "coordinates": {
-      "x": 86,
+      "x": 82,
       "y": 215
     },
     "quote": "",
@@ -123,7 +123,7 @@
     "timestamp": 1776729600000,
     "category": "Fases",
     "coordinates": {
-      "x": 18,
+      "x": 23,
       "y": 245
     },
     "quote": "Resolución de auditoría clínica y optimización de sistemas masivos de datos.",
@@ -137,7 +137,7 @@
     "timestamp": 1776816000000,
     "category": "Fases",
     "coordinates": {
-      "x": 72,
+      "x": 77,
       "y": 275
     },
     "quote": "Evolución a Inteligencia Clínica y Optimización de Precisión para Big Data.",
@@ -151,7 +151,7 @@
     "timestamp": 1776902400000,
     "category": "Fases",
     "coordinates": {
-      "x": 16,
+      "x": 30,
       "y": 305
     },
     "quote": "Estabilización de Ingesta Masiva e Integridad de Datos Clínicos (V2.7.1).",
@@ -165,7 +165,7 @@
     "timestamp": 1776988800000,
     "category": "Fases",
     "coordinates": {
-      "x": 77,
+      "x": 72,
       "y": 335
     },
     "quote": "Refactorización Arquitectónica y Motor de Búsqueda de Segunda Generación (V3.9.0).",
@@ -179,7 +179,7 @@
     "timestamp": 1777248000000,
     "category": "Fases",
     "coordinates": {
-      "x": 28,
+      "x": 19,
       "y": 365
     },
     "quote": "Optimización de la experiencia de usuario clínica y robustez en la ingesta de datos heredados.",
@@ -193,7 +193,7 @@
     "timestamp": 1777507200000,
     "category": "Fases",
     "coordinates": {
-      "x": 74,
+      "x": 83,
       "y": 395
     },
     "quote": "Consolidación de la interfaz clínica y soporte nativo para análisis de hojas de cálculo.",
@@ -209,7 +209,7 @@
     "timestamp": 1777939200000,
     "category": "Fases",
     "coordinates": {
-      "x": 17,
+      "x": 22,
       "y": 425
     },
     "quote": "Gobernanza de sistemas y optimización de precisión clínica.",
@@ -223,7 +223,7 @@
     "timestamp": 1778025600000,
     "category": "Fases",
     "coordinates": {
-      "x": 72,
+      "x": 76,
       "y": 455
     },
     "quote": "Optimización de la fidelidad del informe clínico y persistencia de contextos.",
@@ -237,7 +237,7 @@
     "timestamp": 1778112000000,
     "category": "IA",
     "coordinates": {
-      "x": 15,
+      "x": 11,
       "y": 485
     },
     "quote": "",
@@ -251,7 +251,7 @@
     "timestamp": 1778112000000,
     "category": "Fases",
     "coordinates": {
-      "x": 85,
+      "x": 71,
       "y": 515
     },
     "quote": "Estabilización de la jerarquía clínica y automatización de la gobernanza de software.",
@@ -267,7 +267,7 @@
     "timestamp": 1778198400000,
     "category": "Seguridad",
     "coordinates": {
-      "x": 18,
+      "x": 12,
       "y": 545
     },
     "quote": "Gobernanza de Seguridad Pública, Privacidad IA y Exportación Selectiva (V5.0.0).",
@@ -281,7 +281,7 @@
     "timestamp": 1778457600000,
     "category": "Fases",
     "coordinates": {
-      "x": 83,
+      "x": 76,
       "y": 575
     },
     "quote": "Herramientas de Auditoría Técnica y Refinamiento de la Taxonomía Clínica (V5.2.0).",
@@ -295,7 +295,7 @@
     "timestamp": 1778544000000,
     "category": "Fases",
     "coordinates": {
-      "x": 26,
+      "x": 30,
       "y": 605
     },
     "quote": "Implementación de Motor Semántico Estructurado y Optimización Extrema de Rendimiento (V5.3.0).",
@@ -309,10 +309,240 @@
     "timestamp": 1778630400000,
     "category": "Fases",
     "coordinates": {
-      "x": 87,
+      "x": 73,
       "y": 635
     },
     "quote": "Finalización del Admin Studio y Fortalecimiento de la Gobernanza de Software (V6.0.0).",
+    "tags": []
+  },
+  {
+    "id": "entry-22",
+    "title": "Fase 30: Admin Studio Precision & Resource Integration (V6.5.0)",
+    "content": "Integrar recursos canónicos y mejorar la gestión estructural en el Admin Studio.   - Implementación de la Biblioteca de Recursos Clínicos (OBS, MIR, ALG). - Capacidad de crear y eliminar Secciones y Grupos en tiempo real. - Mejora del Drag & Drop en `FormDesigner` con feedback visual. - Solución al ...",
+    "date": "15 MAY, 2026",
+    "timestamp": 1778803200000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 26,
+      "y": 665
+    },
+    "quote": "Integración de recursos canónicos y optimización del diseño clínico.",
+    "tags": []
+  },
+  {
+    "id": "entry-23",
+    "title": "Fase 32: Admin Studio UI/UX & Governance Hardening (V6.5.2)",
+    "content": "Estabilizar la interfaz del Admin Studio y normalizar el sistema de versiones.   - Rediseño de la cabecera del Admin Studio con Glassmorphism y logo integrado. - Añadido modal de ayuda interactivo sobre plantillas y biblioteca. - Nombre del formulario personalizable en el diseñador. - Añadido botón ...",
+    "date": "18 MAY, 2026",
+    "timestamp": 1779062400000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 89,
+      "y": 695
+    },
+    "quote": "Estabilización de UI/UX y gobernanza en el módulo de administración.",
+    "tags": []
+  },
+  {
+    "id": "entry-24",
+    "title": "Fase 38: Estabilización Final y Lanzamiento (V7.0.0-STABLE)",
+    "content": "Culminar la producción del sistema, resolver errores visuales y lógicos en entornos dinámicos y efectuar la validación definitiva del motor.   - **Desambiguación de Ingesta**: Solucionado el fallo crítico por columnas de CSV duplicadas mediante sufijación inteligente (`NHC (1)`), evitando la pérdida...",
+    "date": "19 MAY, 2026",
+    "timestamp": 1779148800000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 23,
+      "y": 725
+    },
+    "quote": "Congelación, QA Definitivo y Lanzamiento a Producción (V7.0.0-STABLE).",
+    "tags": []
+  },
+  {
+    "id": "entry-25",
+    "title": "Fase 39: Estabilización, Robustez de IndexedDB y Auditoría de Validación (V7.0.1 / V2.0.1-STABLE)",
+    "content": "Realizar una auditoría técnica completa del proyecto y del Admin Studio bajo el protocolo de refactorización segura para resolver bugs silenciosos, fugas de temporizadores, fugas de estado y robustecer la capa de base de datos.   - **Solución a Fugas de Temporizadores en Pruebas**: Corregidos cuello...",
+    "date": "21 MAY, 2026",
+    "timestamp": 1779321600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 78,
+      "y": 755
+    },
+    "quote": "Auditoría técnica, optimización de base de datos y validación de esquemas (V7.0.1).",
+    "tags": [
+      "Vite"
+    ]
+  },
+  {
+    "id": "entry-26",
+    "title": "Fase 40: Auditoría de Regresiones, Corrección de Descompresiones Semánticas y Filtros Estructurales Vacíos (V7.0.2 / V2.0.2-STABLE)",
+    "content": "Ejecutar una auditoría de regresiones completa sobre el motor Queryclin y Admin Studio para resolver fallos en la expansión de sinónimos, filtros en búsquedas vacías y un bloqueo de interfaz en la carga de vistas dinámicas.   - **Solución a Crash de UI Diferido**: Envoltura del renderizado perezoso ...",
+    "date": "21 MAY, 2026",
+    "timestamp": 1779321600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 17,
+      "y": 785
+    },
+    "quote": "Auditoría de regresiones clínicas y optimización semántica multipalabra (V7.0.2).",
+    "tags": [
+      "React"
+    ]
+  },
+  {
+    "id": "entry-27",
+    "title": "Fase 41: Pre-Producción y Hardening de Concurrencia y Conexión (V7.0.3 / V2.0.3-STABLE)",
+    "content": "Robustecer la estabilidad de ejecución en entornos multi-pestaña, optimizar la concurrencia en la ingesta y consultas de búsqueda, e implementar mecanismos defensivos de inicialización y control de estado.   - **Hardening de Conexión IndexedDB**: Registro de manejadores para los eventos `onversionch...",
+    "date": "21 MAY, 2026",
+    "timestamp": 1779321600000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 72,
+      "y": 815
+    },
+    "quote": "Fase de Pre-Producción, Hardening de Concurrencia y Resiliencia en indexedDB (V7.0.3).",
+    "tags": []
+  },
+  {
+    "id": "entry-28",
+    "title": "Auditoría de Calidad (QA), Pruebas de Estrés y Documentación Preparatoria",
+    "content": "Validar exhaustivamente las optimizaciones de concurrencia de la Fase 41 y preparar el entorno para la próxima integración de diseño (Admin Studio).   - Ejecución de un plan de pruebas manuales y automatizadas (QA) sobre el motor de búsqueda y la ingesta masiva tras los cambios en IndexedDB y Web Wo...",
+    "date": "22 MAY, 2026",
+    "timestamp": 1779408000000,
+    "category": "General",
+    "coordinates": {
+      "x": 11,
+      "y": 845
+    },
+    "quote": "Auditoría de calidad (QA) y pruebas de estrés post-optimización.",
+    "tags": []
+  },
+  {
+    "id": "entry-29",
+    "title": "Fase 40 a 42: Búsqueda por Frase Exacta, Consolidación de Admin Studio y Refactorización del Modo Oscuro (V7.2.2-STABLE / V2.2.2-STABLE)",
+    "content": "Implementar la búsqueda por frase exacta en texto libre, consolidar de forma segura el Admin Studio en la rama principal (main), y homogeneizar la tematización de la interfaz en modo oscuro y claro mediante variables semánticas.   - **Búsqueda por Frase Exacta (V7.2.0)**: Extensión del motor de búsq...",
+    "date": "25 MAY, 2026",
+    "timestamp": 1779667200000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 73,
+      "y": 875
+    },
+    "quote": "Búsqueda por frase exacta, consolidación de Admin Studio y tematización unificada (V7.2.2-STABLE).",
+    "tags": [
+      "React"
+    ]
+  },
+  {
+    "id": "entry-30",
+    "title": "Documentación Funcional y Refinamiento del Centro de Ayuda",
+    "content": "Estandarizar la documentación del repositorio y optimizar la interfaz de soporte para el usuario final.   - Actualización exhaustiva de la documentación técnica y del historial de cambios (`CHANGELOG.md`). - Mejoras y rediseño en la Interfaz de Usuario (UI) del Centro de Ayuda integrado en Queryclin...",
+    "date": "26 MAY, 2026",
+    "timestamp": 1779753600000,
+    "category": "General",
+    "coordinates": {
+      "x": 14,
+      "y": 905
+    },
+    "quote": "Refinamiento de documentación técnica e interfaz de soporte.",
+    "tags": []
+  },
+  {
+    "id": "entry-31",
+    "title": "Planificación de Cierre y Avance Formativo",
+    "content": "Estructurar la documentación final del proyecto y avanzar en los módulos de certificación técnica.   - Planificación de la estructura para el informe técnico final del proyecto, definiendo los puntos clave sobre la arquitectura Local-First. - Avance intensivo en los módulos de ciberseguridad y redes...",
+    "date": "27 MAY, 2026",
+    "timestamp": 1779840000000,
+    "category": "General",
+    "coordinates": {
+      "x": 88,
+      "y": 935
+    },
+    "quote": "Planificación documental y avance en certificaciones tecnológicas.",
+    "tags": []
+  },
+  {
+    "id": "entry-32",
+    "title": "Integración de Recursos Visuales y Presentación de Producto",
+    "content": "Enriquecer la presentación visual del repositorio público para comunicar eficazmente el valor del software.   - Creación e integración de una imagen principal (*hero image*) centrada en el `README.md`. - Recopilación y adición de capturas de pantalla de la aplicación para documentar los estados y vi...",
+    "date": "28 MAY, 2026",
+    "timestamp": 1779926400000,
+    "category": "General",
+    "coordinates": {
+      "x": 26,
+      "y": 965
+    },
+    "quote": "Implementación de identidad visual corporativa y documentación gráfica.",
+    "tags": []
+  },
+  {
+    "id": "entry-33",
+    "title": "Especialización en IA, Redes y Ciberseguridad",
+    "content": "Culminar la formación en habilidades transversales exigidas para la modernización de infraestructuras IT.   - Finalización y obtención de certificados oficiales en **Claude 101** y **Claude Code 101** (Anthropic) sobre IA y desarrollo asistido por agentes. - Completado el curso **Networking Basics**...",
+    "date": "29 MAY, 2026",
+    "timestamp": 1780012800000,
+    "category": "IA",
+    "coordinates": {
+      "x": 84,
+      "y": 995
+    },
+    "quote": "Certificaciones avanzadas en Inteligencia Artificial, Redes y Ciberseguridad.",
+    "tags": []
+  },
+  {
+    "id": "entry-34",
+    "title": "Elaboración de Memoria Técnica y Refactorización Final",
+    "content": "Elaborar la documentación de arquitectura final y ejecutar la limpieza definitiva del código base.   - **Memoria Técnica**: Redacción del informe final del proyecto (`INFORME_PROYECTO.md`), documentando la arquitectura Local-First, Web Workers, IndexedDB, y los desafíos superados (ej. cuellos de bot...",
+    "date": "01 JUN, 2026",
+    "timestamp": 1780272000000,
+    "category": "General",
+    "coordinates": {
+      "x": 17,
+      "y": 1025
+    },
+    "quote": "Elaboración de Memoria Técnica y Refactorización de Producción.",
+    "tags": []
+  },
+  {
+    "id": "entry-35",
+    "title": "Fase de Despliegue, Empaquetado y Pruebas de Rendimiento en Entorno Local",
+    "content": "Asegurar que la build generada es totalmente operativa, comprobar rendimientos de carga local-first y preparar el paquete de despliegue.   - Generación del build de producción definitivo de la aplicación Queryclin y el Admin Studio (`npm run build`). - Verificación del rendimiento y tiempos de carga...",
+    "date": "02 JUN, 2026",
+    "timestamp": 1780358400000,
+    "category": "Fases",
+    "coordinates": {
+      "x": 73,
+      "y": 1055
+    },
+    "quote": "Empaquetado de producción, testing de compatibilidad y optimización offline.",
+    "tags": []
+  },
+  {
+    "id": "entry-36",
+    "title": "Preparación de la Demo, Vídeos Demostrativos y Documentación de Usuario",
+    "content": "Facilitar la comprensión funcional de Queryclin y el Admin Studio mediante guías visuales y capturas dinámicas.   - Grabación y edición de videotutoriales de corta duración mostrando los flujos críticos del sistema (ingesta XLSX, búsqueda BM25 y el diseñador de formularios). - Elaboración de la guía...",
+    "date": "03 JUN, 2026",
+    "timestamp": 1780444800000,
+    "category": "General",
+    "coordinates": {
+      "x": 15,
+      "y": 1085
+    },
+    "quote": "Creación de material demostrativo y manuales de asistencia de usuario.",
+    "tags": []
+  },
+  {
+    "id": "entry-37",
+    "title": "Cierre del Entorno de Prácticas, Entrega de Documentación y Balance Final",
+    "content": "Completar la entrega formal del proyecto, realizar la última sincronización del repositorio y balance general de competencias del periodo FEM2.   - Sincronización final y congelación definitiva de la rama de producción (`V7.2.2-STABLE`) en el repositorio público de GitHub. - Entrega formal de la mem...",
+    "date": "05 JUN, 2026",
+    "timestamp": 1780617600000,
+    "category": "General",
+    "coordinates": {
+      "x": 88,
+      "y": 1115
+    },
+    "quote": "Cierre de estancia de prácticas, entrega formal y evaluación de desempeño.",
     "tags": []
   }
 ]

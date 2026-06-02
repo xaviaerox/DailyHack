@@ -1,8 +1,8 @@
 const fs = require('fs');
 const path = require('path');
 
-const DIARY_PATH = 'c:\\Users\\hrmadm\\Documents\\GitHub\\DIARIO_APRENDIZAJE.md';
-const OUTPUT_PATH = path.join(__dirname, 'src', 'data', 'entries.json');
+const DIARY_PATH = path.join(__dirname, '../docs/DIARIO_APRENDIZAJE.md');
+const OUTPUT_PATH = path.join(__dirname, '../src', 'data', 'entries.json');
 
 function parseDiary() {
     if (!fs.existsSync(DIARY_PATH)) {

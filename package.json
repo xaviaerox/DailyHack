@@ -9,9 +9,9 @@
     "preview": "vite preview",
     "clean": "rm -rf dist",
     "lint": "tsc --noEmit",
-    "sync-diary": "node sync_diary.cjs",
-    "watch-diary": "node watch_diary.cjs",
-    "dev:full": "node dev_full.cjs"
+    "sync-diary": "node scripts/sync_diary.cjs",
+    "watch-diary": "node scripts/watch_diary.cjs",
+    "dev:full": "node scripts/dev_full.cjs"
   },
   "dependencies": {
     "@google/genai": "^1.29.0",
